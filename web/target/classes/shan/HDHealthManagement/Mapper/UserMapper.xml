@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="shan.HDHealthManagement.Mapper.UserDao">
+
+    <select id="findByUsername" resultType="shan.HDHealthManagement.po.User">
+        select * from user where userName = #{userName}
+    </select>
+    
+    <select id="getAll" resultType="shan.HDHealthManagement.po.User">
+        select * from user
+    </select>
+    
+    <select id="getByPage" resultType="shan.HDHealthManagement.po.User">
+        select * from user  LIMIT #{index},#{rows}
+    </select>
+    <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="shan.HDHealthManagement.po.User">
+        insert into user(id,userName,name,password,tel,email)
+        values(#{id},#{userName},#{name},#{password},#{tel},#{email})
+    </insert>
+    
+    <insert id="addUserRole" useGeneratedKeys="true" keyProperty="id" parameterType="shan.HDHealthManagement.po.UserRole">
+        insert into userRole(id,userId,roleId)
+        values(#{id},#{userId},#{roleId})
+    </insert>
+    
+    <select id="findById" resultType="shan.HDHealthManagement.po.User">
+        select * from user where id = #{id}
+    </select>
+    
+    <select id="findRoleById" resultType="shan.HDHealthManagement.po.UserRole">
+        select * from userRole where userId = #{id}
+    </select>
+    <delete id="delUserRole">
+        delete from userRole where userId=#{userId} and roleId = #{roleId}
+    </delete>
+    
+    <delete id="del">
+        delete from user where id=#{id}
+    </delete>
+    
+    <update id="edit" parameterType="shan.HDHealthManagement.po.User">
+        update user set userName=#{userName},name=#{name},tel=#{tel},email=#{email}
+        where id=#{id}
+    </update>
+</mapper>
