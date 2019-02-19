@@ -1,5 +1,10 @@
 package shan.HDHealthManagement.po;
 
+/**
+ * 角色实体类
+ * @author 18732
+ *
+ */
 public class Role {
 	private Long id;
 	private String name;

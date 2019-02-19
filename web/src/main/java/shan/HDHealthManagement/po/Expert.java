@@ -1,5 +1,10 @@
 package shan.HDHealthManagement.po;
 
+/**
+ * 专家实体类
+ * @author 18732
+ *
+ */
 public class Expert {
 	private Long id;
 	private String hospital;
@@ -17,12 +22,7 @@ public class Expert {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getHospital() {
-		return hospital;
-	}
-	public void setHospital(String hospital) {
-		this.hospital = hospital;
-	}
+	
 	public Integer getRecommend() {
 		return recommend;
 	}
@@ -70,5 +70,17 @@ public class Expert {
 	}
 	public void setFile(String file) {
 		this.file = file;
+	}
+	/**
+	 * @return hospital
+	 */
+	public String getHospital() {
+		return hospital;
+	}
+	/**
+	 * @param hospital 要设置的 hospital
+	 */
+	public void setHospital(String hospital) {
+		this.hospital = hospital;
 	}
 }

@@ -48,33 +48,11 @@ public class CasesAction {
 	
 	@RequestMapping(value="/add.do")
 	@ResponseBody
-	public void add(@RequestParam("fileUrl") CommonsMultipartFile fileUrl,
-            HttpServletRequest request,HttpServletResponse response) {
+	public void add(Cases cases,HttpServletResponse response) {
 		try {
 			PrintWriter out = response.getWriter();
-			if (!fileUrl.isEmpty()) {
-	            String type = fileUrl.getOriginalFilename().substring(
-	            		fileUrl.getOriginalFilename().indexOf("."));// 取文件格式后缀名
-	            String filename = System.currentTimeMillis() + type;// 取当前时间戳作为文件名
-	            String path = request.getSession().getServletContext()
-	                    .getRealPath("/casesFile/" + filename);// 存放位置
-	            File destFile = new File(path);
-	            try {
-	                FileUtils.copyInputStreamToFile(fileUrl.getInputStream(), destFile);// 复制临时文件到指定目录下
-	                Cases cases = new Cases();
-	                cases.setFile("/casesFile/" + filename);
-	                cases.setCaseName(request.getParameter("caseName"));
-	                cases.setName(request.getParameter("name"));
-	                cases.setAge(Integer.valueOf(request.getParameter("age")));
-	                cases.setDoctor(request.getParameter("doctor"));
-	                cases.setHospital(request.getParameter("hospital"));
-	                cases.setIntroduce(request.getParameter("introduce"));
-	                casesService.add(cases);
-	                out.write("suc");
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	            }
-	        }
+            casesService.add(cases);
+            out.write("suc");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -89,31 +67,9 @@ public class CasesAction {
 	
 	@RequestMapping(value="/edit.do")
 	@ResponseBody
-	public void edit(@RequestParam(value="fileUrl",required=false) CommonsMultipartFile file,
-            HttpServletRequest request,HttpServletResponse response){
+	public void edit(Cases cases,HttpServletResponse response){
 		try {
 			PrintWriter out = response.getWriter();
-			Cases cases = casesService.findById(Long.valueOf(request.getParameter("id")));
-			if (!file.isEmpty()) {
-	            String type = file.getOriginalFilename().substring(
-	                    file.getOriginalFilename().indexOf("."));// 取文件格式后缀名
-	            String filename = System.currentTimeMillis() + type;// 取当前时间戳作为文件名
-	            String path = request.getSession().getServletContext()
-	                    .getRealPath("/casesFile/" + filename);// 存放位置
-	            File destFile = new File(path);
-	            try {
-	                FileUtils.copyInputStreamToFile(file.getInputStream(), destFile);// 复制临时文件到指定目录下
-	                cases.setFile("/casesFile/" + filename);
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	            }
-	        }
-			cases.setCaseName(request.getParameter("caseName"));
-            cases.setName(request.getParameter("name"));
-            cases.setAge(Integer.valueOf(request.getParameter("age")));
-            cases.setDoctor(request.getParameter("doctor"));
-            cases.setHospital(request.getParameter("hospital"));
-            cases.setIntroduce(request.getParameter("introduce"));
             casesService.edit(cases);
             out.write("suc");
 		} catch (IOException e) {
@@ -146,5 +102,29 @@ public class CasesAction {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	@RequestMapping(value="/upload.do")
+	@ResponseBody
+	public void upload(@RequestParam(value="file",required=false) CommonsMultipartFile file,
+            HttpServletRequest request,HttpServletResponse response){
+		if (!file.isEmpty()) {
+            String type = file.getOriginalFilename().substring(
+                    file.getOriginalFilename().indexOf("."));// 取文件格式后缀名
+            String filename = System.currentTimeMillis() + type;// 取当前时间戳作为文件名
+            String path = request.getSession().getServletContext()
+                    .getRealPath("/casesFile/" + filename);// 存放位置
+            File destFile = new File(path);
+            try {
+        		PrintWriter out = response.getWriter();
+                FileUtils.copyInputStreamToFile(file.getInputStream(), destFile);// 复制临时文件到指定目录下
+                JSONObject object = new JSONObject();
+    			object.put("data", "casesFile/" + filename);
+    			object.put("code", 0);
+    			object.put("msg", "");
+    			out.write(object.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 	}
 }

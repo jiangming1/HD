@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="<%=basePath %>/layui/layui.js"></script>
 </head>
 <body>
-	<form id="form" method="post" action="<%=basePath %>/encyclopedias/edit.do" enctype="multipart/form-data" class="layui-form layui-form-pane">
+	<form id="form" method="post" action="<%=basePath %>/encyclopedias/edit.do" class="layui-form layui-form-pane">
 	<%
 	Encyclopedias encyclopedias = (Encyclopedias)request.getAttribute("encyclopedias");
 	%>
@@ -36,22 +36,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="layui-form-item">
 			<label class="layui-form-label">介绍</label>
 			<div class="layui-input-block">
-				<textarea rows="5" cols="30" value="<%=encyclopedias.getIntroduce() %>" name="introduce" placeholder="请输入" lay-verify="required"
-					autocomplete="off"></textarea>
+				<textarea rows="5" cols="30" name="introduce" placeholder="请输入" lay-verify="required"
+					autocomplete="off"><%=encyclopedias.getIntroduce() %></textarea>
 			</div>
 		</div>
+		<button type="button" class="layui-btn" id="upload">
+			<i class="layui-icon">&#xe67c;</i>上传图片
+		</button>
+		
+		<input type="text" id="fileUrl" name="fileUrl" style="display:none;" value="<%=encyclopedias.getFileUrl() %>">
 		<div class="layui-form-item">
-			<label class="layui-form-label">图片</label>
-			<div class="layui-input-block">
-				<input type="file" name="fileUrl" class="layui-input">
-			</div>
+			<img height="100" width="100" id="file" src="<%=encyclopedias.getFileUrl() %>">
 		</div>
 		<div class="layui-form-item">
-			<img src="<%=basePath %><%=encyclopedias.getFile() %>">
-		</div>
-		<div class="layui-form-item">
 			<div class="layui-input-block">
-				<button class="layui-btn" lay-submit lay-filter="userform">立即提交</button>
+				<button class="layui-btn"  lay-filter="userform" lay-submit>立即提交</button>
 				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 			</div>
 		</div>
@@ -61,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  var form = layui.form;
 		  form.on('submit(userform)', function(data){
 			  $("#form").ajaxSubmit(function(data){
-					if(data=="<pre>suc</pre>"){
+					if(data=="suc"){
 						layer.alert('保存成功!', function(){
 							var index = parent.layer.getFrameIndex(window.name);
 							parent.layer.close(index);
@@ -73,6 +72,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  return false;
 			});
 		});
-		    
-</script>
+		layui.use('upload', function() {
+			var upload = layui.upload;
+			upload.render({
+				elem : '#upload',
+				accept:'image',
+				acceptMime: 'image/jpg, image/png',
+				url : '<%=basePath %>/encyclopedias/upload.do',
+				done : function(res) {
+					$("#fileUrl").val(res.data);
+					$("#file").attr("src",res.data);
+				},
+				error : function() {
+					alert("文件上传失败");
+				}
+			});
+		});
+	</script>
 </html>

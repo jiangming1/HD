@@ -12,8 +12,8 @@
     </select>
     
     <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="shan.HDHealthManagement.po.Video">
-        insert into video(id,name,introduce,file)
-        values(#{id},#{name},#{introduce},#{file})
+        insert into video(id,name,introduce,fileUrl)
+        values(#{id},#{name},#{introduce},#{fileUrl})
     </insert>
     
     <select id="findById" resultType="shan.HDHealthManagement.po.Video">
@@ -21,7 +21,7 @@
     </select>
     
     <update id="edit" parameterType="shan.HDHealthManagement.po.Video">
-        update video set name=#{name},introduce=#{introduce},file=#{file}
+        update video set name=#{name},introduce=#{introduce},fileUrl=#{fileUrl}
         where id=#{id}
     </update>
  

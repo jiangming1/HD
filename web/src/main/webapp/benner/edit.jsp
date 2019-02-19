@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="<%=basePath %>/layui/layui.js"></script>
 </head>
 <body>
-	<form id="form" method="post" action="<%=basePath %>/benner/edit.do" enctype="multipart/form-data" class="layui-form layui-form-pane">
+	<form id="form" method="post" action="<%=basePath %>/benner/edit.do" class="layui-form layui-form-pane">
 	<%
 		Benner benner = (Benner)request.getAttribute("benner");
 	%>
@@ -40,14 +40,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					autocomplete="off" class="layui-input">
 			</div>
 		</div>
+		<button type="button" class="layui-btn" id="upload">
+			<i class="layui-icon">&#xe67c;</i>上传图片
+		</button>
+		
+		<input type="text" id="fileUrl" name="fileUrl" style="display:none;" value="<%=benner.getFileUrl() %>">
 		<div class="layui-form-item">
-			<label class="layui-form-label">图片</label>
-			<div class="layui-input-block">
-				<input type="file" name="fileUrl" class="layui-input">
-			</div>
-		</div>
-		<div class="layui-form-item">
-			<img src="<%=basePath %><%=benner.getFile() %>">
+			<img height="100" width="100" id="file" src="<%=benner.getFileUrl() %>">
 		</div>
 		<div class="layui-form-item">
 			<div class="layui-input-block">
@@ -73,6 +72,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  return false;
 			});
 		});
-		    
+		layui.use('upload', function() {
+			var upload = layui.upload;
+			upload.render({
+				elem : '#upload',
+				accept:'image',
+				acceptMime: 'image/jpg, image/png',
+				url : '<%=basePath %>/benner/upload.do',
+				done : function(res) {
+					$("#fileUrl").val(res.data);
+					$("#file").attr("src",res.data);
+				},
+				error : function() {
+					alert("文件上传失败");
+				}
+			});
+		});    
 </script>
 </html>

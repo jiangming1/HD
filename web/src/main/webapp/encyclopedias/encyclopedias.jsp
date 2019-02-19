@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>信息管理系统</title>
+<title>小百科</title>
 <script type="text/javascript"
 	src="<%=basePath%>/scripts/jquery/jquery-1.7.1.js"></script>
  <link rel="stylesheet" href="<%=basePath %>/layui/css/layui.css" media="all">
@@ -41,9 +41,12 @@
 			  type: 2,
 			  title:"添加小百科",
 			  moveOut:true,
-			  area: ['350px', '250px'],
+			  area: ['350px', '350px'],
 			  offset: '100px',
-			  content: '<%=basePath %>/encyclopedias/add.jsp'
+			  content: '<%=basePath %>/encyclopedias/add.jsp',
+			  end:function(){
+				  table.reload();
+			  }
 			});
 	}
 	function edit(id){
@@ -51,7 +54,7 @@
 			  type: 2,
 			  title:"修改小百科",
 			  moveOut:true,
-			  area: ['350px', '250px'],
+			  area: ['350px', '450px'],
 			  offset: '100px',
 			  content: '<%=basePath %>/encyclopedias/editJsp.do?id='+id
 			});

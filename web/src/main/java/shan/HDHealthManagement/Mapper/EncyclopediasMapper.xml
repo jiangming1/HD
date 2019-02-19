@@ -12,8 +12,8 @@
     </select>
     
     <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="shan.HDHealthManagement.po.Encyclopedias">
-        insert into encyclopedias(id,name,introduce,file)
-        values(#{id},#{name},#{introduce},#{file})
+        insert into encyclopedias(id,name,introduce,fileUrl)
+        values(#{id},#{name},#{introduce},#{fileUrl})
     </insert>
     
     <select id="findById" resultType="shan.HDHealthManagement.po.Encyclopedias">
@@ -21,7 +21,7 @@
     </select>
     
     <update id="edit" parameterType="shan.HDHealthManagement.po.Encyclopedias">
-        update encyclopedias set name=#{name},introduce=#{introduce},file=#{file}
+        update encyclopedias set name=#{name},introduce=#{introduce},fileUrl=#{fileUrl}
         where id=#{id}
     </update>
  

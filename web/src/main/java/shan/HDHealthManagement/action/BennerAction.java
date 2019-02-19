@@ -48,29 +48,11 @@ public class BennerAction {
 	
 	@RequestMapping(value="/add.do")
 	@ResponseBody
-	public void add(@RequestParam("fileUrl") CommonsMultipartFile file,
-            HttpServletRequest request,HttpServletResponse response) {
+	public void add(Benner benner,HttpServletResponse response) {
 		try {
 			PrintWriter out = response.getWriter();
-			if (!file.isEmpty()) {
-	            String type = file.getOriginalFilename().substring(
-	                    file.getOriginalFilename().indexOf("."));// 取文件格式后缀名
-	            String filename = System.currentTimeMillis() + type;// 取当前时间戳作为文件名
-	            String path = request.getSession().getServletContext()
-	                    .getRealPath("/bennerFile/" + filename);// 存放位置
-	            File destFile = new File(path);
-	            try {
-	                FileUtils.copyInputStreamToFile(file.getInputStream(), destFile);// 复制临时文件到指定目录下
-	                Benner benner = new Benner();
-	                benner.setName(request.getParameter("name"));
-	                benner.setUrl(request.getParameter("url"));
-	                benner.setFile("/bennerFile/" + filename);
-	                bennerService.add(benner);
-	                out.write("suc");
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	            }
-	        }
+			bennerService.add(benner);
+			out.write("suc");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -85,27 +67,9 @@ public class BennerAction {
 	
 	@RequestMapping(value="/edit.do")
 	@ResponseBody
-	public void edit(@RequestParam(value="fileUrl",required=false) CommonsMultipartFile file,
-            HttpServletRequest request,HttpServletResponse response){
+	public void edit(Benner benner,HttpServletResponse response){
 		try {
 			PrintWriter out = response.getWriter();
-			Benner benner = bennerService.findById(Long.valueOf(request.getParameter("id")));
-			if (!file.isEmpty()) {
-	            String type = file.getOriginalFilename().substring(
-	                    file.getOriginalFilename().indexOf("."));// 取文件格式后缀名
-	            String filename = System.currentTimeMillis() + type;// 取当前时间戳作为文件名
-	            String path = request.getSession().getServletContext()
-	                    .getRealPath("/bennerFile/" + filename);// 存放位置
-	            File destFile = new File(path);
-	            try {
-	                FileUtils.copyInputStreamToFile(file.getInputStream(), destFile);// 复制临时文件到指定目录下
-	                benner.setFile("/bennerFile/" + filename);
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	            }
-	        }
-            benner.setName(request.getParameter("name"));
-            benner.setUrl(request.getParameter("url"));
             bennerService.edit(benner);
             out.write("suc");
 		} catch (IOException e) {
@@ -139,5 +103,28 @@ public class BennerAction {
 			e.printStackTrace();
 		}
 	}
-
+	@RequestMapping(value="/upload.do")
+	@ResponseBody
+	public void upload(@RequestParam(value="file",required=false) CommonsMultipartFile file,
+            HttpServletRequest request,HttpServletResponse response){
+		if (!file.isEmpty()) {
+            String type = file.getOriginalFilename().substring(
+                    file.getOriginalFilename().indexOf("."));// 取文件格式后缀名
+            String filename = System.currentTimeMillis() + type;// 取当前时间戳作为文件名
+            String path = request.getSession().getServletContext()
+                    .getRealPath("/bennerFile/" + filename);// 存放位置
+            File destFile = new File(path);
+            try {
+        		PrintWriter out = response.getWriter();
+                FileUtils.copyInputStreamToFile(file.getInputStream(), destFile);// 复制临时文件到指定目录下
+                JSONObject object = new JSONObject();
+    			object.put("data", "bennerFile/" + filename);
+    			object.put("code", 0);
+    			object.put("msg", "");
+    			out.write(object.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+	}
 }

@@ -68,15 +68,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					autocomplete="off"></textarea>
 			</div>
 		</div>
+		<button type="button" class="layui-btn" id="upload">
+			<i class="layui-icon">&#xe67c;</i>上传图片
+		</button>
+		
+		<input type="text" id="fileUrl" name="fileUrl" style="display:none;" value="<%=cases.getFileUrl() %>">
 		<div class="layui-form-item">
-			<label class="layui-form-label">图片</label>
-			<div class="layui-input-block">
-				<input type="file" name="fileUrl" lay-verify="required"
-					autocomplete="off" class="layui-input">
-			</div>
-		</div>
-		<div class="layui-form-item">
-			<img src="<%=basePath %><%=cases.getFile() %>">
+			<img height="100" width="100" id="file" src="<%=cases.getFileUrl() %>">
 		</div>
 		<div class="layui-form-item">
 			<div class="layui-input-block">
@@ -102,6 +100,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  return false;
 			});
 		});
-		    
+		layui.use('upload', function() {
+			var upload = layui.upload;
+			upload.render({
+				elem : '#upload',
+				accept:'image',
+				acceptMime: 'image/jpg, image/png',
+				url : '<%=basePath %>/cases/upload.do',
+				done : function(res) {
+					$("#fileUrl").val(res.data);
+					$("#file").attr("src",res.data);
+				},
+				error : function() {
+					alert("文件上传失败");
+				}
+			});
+		});
 </script>
 </html>

@@ -1,10 +1,15 @@
 package shan.HDHealthManagement.po;
 
+/**
+ * 小百科实体类
+ * @author 18732
+ *
+ */
 public class Encyclopedias {
 	private Long id;
 	private String name;
 	private String introduce;
-	private String file;
+	private String fileUrl;
 	public Long getId() {
 		return id;
 	}
@@ -23,10 +28,11 @@ public class Encyclopedias {
 	public void setIntroduce(String introduce) {
 		this.introduce = introduce;
 	}
-	public String getFile() {
-		return file;
+	public String getFileUrl() {
+		return fileUrl;
 	}
-	public void setFile(String file) {
-		this.file = file;
+	public void setFileUrl(String fileUrl) {
+		this.fileUrl = fileUrl;
 	}
+
 }

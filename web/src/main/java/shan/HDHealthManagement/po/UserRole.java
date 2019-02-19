@@ -1,5 +1,9 @@
 package shan.HDHealthManagement.po;
-
+/**
+ * 用户角色实体类
+ * @author 18732
+ *
+ */
 public class UserRole {
 	private Long id;
 	private Long userId;

@@ -49,29 +49,12 @@ public class EncyclopediasAction {
 	
 	@RequestMapping(value="/add.do")
 	@ResponseBody
-	public void add(@RequestParam("fileUrl") CommonsMultipartFile file,
+	public void add(Encyclopedias encyclopedias,
             HttpServletRequest request,HttpServletResponse response) {
 		try {
 			PrintWriter out = response.getWriter();
-			if (!file.isEmpty()) {
-	            String type = file.getOriginalFilename().substring(
-	                    file.getOriginalFilename().indexOf("."));// 取文件格式后缀名
-	            String filename = System.currentTimeMillis() + type;// 取当前时间戳作为文件名
-	            String path = request.getSession().getServletContext()
-	                    .getRealPath("/encyclopediasFile/" + filename);// 存放位置
-	            File destFile = new File(path);
-	            try {
-	                FileUtils.copyInputStreamToFile(file.getInputStream(), destFile);// 复制临时文件到指定目录下
-	                Encyclopedias encyclopedias = new Encyclopedias();
-	                encyclopedias.setName(request.getParameter("name"));
-	                encyclopedias.setIntroduce(request.getParameter("introduce"));
-	                encyclopedias.setFile("/encyclopediasFile/" + filename);
-	                encyclopediasService.add(encyclopedias);
-	                out.write("suc");
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	            }
-	        }
+            encyclopediasService.add(encyclopedias);
+            out.write("suc");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -81,32 +64,15 @@ public class EncyclopediasAction {
 	public String editJsp(@RequestParam("id") Long id,HttpServletRequest request){
 		Encyclopedias encyclopedias = encyclopediasService.findById(id);
 		request.setAttribute("encyclopedias", encyclopedias);
-		return "benner/edit";
+		return "encyclopedias/edit";
 	}
 	
 	@RequestMapping(value="/edit.do")
 	@ResponseBody
-	public void edit(@RequestParam(value="fileUrl",required=false) CommonsMultipartFile file,
+	public void edit(Encyclopedias encyclopedias,
             HttpServletRequest request,HttpServletResponse response){
 		try {
 			PrintWriter out = response.getWriter();
-			Encyclopedias encyclopedias = encyclopediasService.findById(Long.valueOf(request.getParameter("id")));
-			if (!file.isEmpty()) {
-	            String type = file.getOriginalFilename().substring(
-	                    file.getOriginalFilename().indexOf("."));// 取文件格式后缀名
-	            String filename = System.currentTimeMillis() + type;// 取当前时间戳作为文件名
-	            String path = request.getSession().getServletContext()
-	                    .getRealPath("/encyclopediasFile/" + filename);// 存放位置
-	            File destFile = new File(path);
-	            try {
-	                FileUtils.copyInputStreamToFile(file.getInputStream(), destFile);// 复制临时文件到指定目录下
-	                encyclopedias.setFile("/encyclopediasFile/" + filename);
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	            }
-	        }
-			encyclopedias.setName(request.getParameter("name"));
-			encyclopedias.setIntroduce(request.getParameter("introduce"));
             encyclopediasService.edit(encyclopedias);
             out.write("suc");
 		} catch (IOException e) {
@@ -139,5 +105,30 @@ public class EncyclopediasAction {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping(value="/upload.do")
+	@ResponseBody
+	public void upload(@RequestParam(value="file",required=false) CommonsMultipartFile file,
+            HttpServletRequest request,HttpServletResponse response){
+		if (!file.isEmpty()) {
+            String type = file.getOriginalFilename().substring(
+                    file.getOriginalFilename().indexOf("."));// 取文件格式后缀名
+            String filename = System.currentTimeMillis() + type;// 取当前时间戳作为文件名
+            String path = request.getSession().getServletContext()
+                    .getRealPath("/encyclopediasFile/" + filename);// 存放位置
+            File destFile = new File(path);
+            try {
+        		PrintWriter out = response.getWriter();
+                FileUtils.copyInputStreamToFile(file.getInputStream(), destFile);// 复制临时文件到指定目录下
+                JSONObject object = new JSONObject();
+    			object.put("data", "encyclopediasFile/" + filename);
+    			object.put("code", 0);
+    			object.put("msg", "");
+    			out.write(object.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 	}
 }

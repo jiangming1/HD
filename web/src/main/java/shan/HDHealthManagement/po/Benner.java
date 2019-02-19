@@ -1,10 +1,15 @@
 package shan.HDHealthManagement.po;
 
+/**
+ * 轮播图实体类
+ * @author 18732
+ *
+ */
 public class Benner {
 	private Long id;
 	private String name;
 	private String url;
-	private String file;
+	private String fileUrl;
 	
 	public Long getId() {
 		return id;
@@ -24,10 +29,11 @@ public class Benner {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public String getFile() {
-		return file;
+	public String getFileUrl() {
+		return fileUrl;
 	}
-	public void setFile(String file) {
-		this.file = file;
+	public void setFileUrl(String fileUrl) {
+		this.fileUrl = fileUrl;
 	}
+
 }

@@ -12,8 +12,8 @@
     </select>
     
     <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="shan.HDHealthManagement.po.Benner">
-        insert into benner(id,name,url,file)
-        values(#{id},#{name},#{url},#{file})
+        insert into benner(id,name,url,fileUrl)
+        values(#{id},#{name},#{url},#{fileUrl})
     </insert>
     
     <select id="findById" resultType="shan.HDHealthManagement.po.Benner">
@@ -21,7 +21,7 @@
     </select>
     
     <update id="edit" parameterType="shan.HDHealthManagement.po.Benner">
-        update benner set name=#{name},url=#{url},file=#{file}
+        update benner set name=#{name},url=#{url},fileUrl=#{fileUrl}
         where id=#{id}
     </update>
  

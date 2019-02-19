@@ -12,8 +12,8 @@
     </select>
     
     <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="shan.HDHealthManagement.po.Cases">
-        insert into cases(id,caseName,name,age,doctor,hospital,introduce,file)
-        values(#{id},#{caseName},#{name},#{age},#{doctor},#{hospital},#{introduce},#{file})
+        insert into cases(id,caseName,name,age,doctor,hospital,introduce,fileUrl)
+        values(#{id},#{caseName},#{name},#{age},#{doctor},#{hospital},#{introduce},#{fileUrl})
     </insert>
     
     <select id="findById" resultType="shan.HDHealthManagement.po.Cases">
@@ -21,7 +21,7 @@
     </select>
     
     <update id="edit" parameterType="shan.HDHealthManagement.po.Cases">
-        update cases set caseName=#{caseName},name=#{name},age=#{age},doctor=#{doctor},hospital=#{hospital},introduce=#{introduce},file=#{file}
+        update cases set caseName=#{caseName},name=#{name},age=#{age},doctor=#{doctor},hospital=#{hospital},introduce=#{introduce},fileUrl=#{fileUrl}
         where id=#{id}
     </update>
  

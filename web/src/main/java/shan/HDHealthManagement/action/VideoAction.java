@@ -48,29 +48,11 @@ public class VideoAction {
 	
 	@RequestMapping(value="/add.do")
 	@ResponseBody
-	public void add(@RequestParam("fileUrl") CommonsMultipartFile file,
-            HttpServletRequest request,HttpServletResponse response) {
+	public void add(Video video,HttpServletResponse response){
 		try {
 			PrintWriter out = response.getWriter();
-			if (!file.isEmpty()) {
-	            String type = file.getOriginalFilename().substring(
-	                    file.getOriginalFilename().indexOf("."));// 取文件格式后缀名
-	            String filename = System.currentTimeMillis() + type;// 取当前时间戳作为文件名
-	            String path = request.getSession().getServletContext()
-	                    .getRealPath("/videoFile/" + filename);// 存放位置
-	            File destFile = new File(path);
-	            try {
-	                FileUtils.copyInputStreamToFile(file.getInputStream(), destFile);// 复制临时文件到指定目录下
-	                Video video = new Video();
-	                video.setName(request.getParameter("name"));
-	                video.setIntroduce(request.getParameter("introduce"));
-	                video.setFile("/videoFile/" + filename);
-	                videoService.add(video);
-	                out.write("suc");
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	            }
-	        }
+            videoService.add(video);
+            out.write("suc");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -85,27 +67,9 @@ public class VideoAction {
 	
 	@RequestMapping(value="/edit.do")
 	@ResponseBody
-	public void edit(@RequestParam(value="fileUrl",required=false) CommonsMultipartFile file,
-            HttpServletRequest request,HttpServletResponse response){
+	public void edit(Video video,HttpServletResponse response){
 		try {
 			PrintWriter out = response.getWriter();
-			Video video = videoService.findById(Long.valueOf(request.getParameter("id")));
-			if (!file.isEmpty()) {
-	            String type = file.getOriginalFilename().substring(
-	                    file.getOriginalFilename().indexOf("."));// 取文件格式后缀名
-	            String filename = System.currentTimeMillis() + type;// 取当前时间戳作为文件名
-	            String path = request.getSession().getServletContext()
-	                    .getRealPath("/videoFile/" + filename);// 存放位置
-	            File destFile = new File(path);
-	            try {
-	                FileUtils.copyInputStreamToFile(file.getInputStream(), destFile);// 复制临时文件到指定目录下
-	                video.setFile("/videoFile/" + filename);
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	            }
-	        }
-			video.setName(request.getParameter("name"));
-			video.setIntroduce(request.getParameter("introduce"));
 			videoService.edit(video);
             out.write("suc");
 		} catch (IOException e) {
@@ -138,5 +102,30 @@ public class VideoAction {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping(value="/upload.do")
+	@ResponseBody
+	public void upload(@RequestParam(value="file",required=false) CommonsMultipartFile file,
+            HttpServletRequest request,HttpServletResponse response){
+		if (!file.isEmpty()) {
+            String type = file.getOriginalFilename().substring(
+                    file.getOriginalFilename().indexOf("."));// 取文件格式后缀名
+            String filename = System.currentTimeMillis() + type;// 取当前时间戳作为文件名
+            String path = request.getSession().getServletContext()
+                    .getRealPath("/videoFile/" + filename);// 存放位置
+            File destFile = new File(path);
+            try {
+        		PrintWriter out = response.getWriter();
+                FileUtils.copyInputStreamToFile(file.getInputStream(), destFile);// 复制临时文件到指定目录下
+                JSONObject object = new JSONObject();
+    			object.put("data", "videoFile/" + filename);
+    			object.put("code", 0);
+    			object.put("msg", "");
+    			out.write(object.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 	}
 }

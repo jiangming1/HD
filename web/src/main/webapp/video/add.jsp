@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="<%=basePath %>/layui/layui.js"></script>
 </head>
 <body>
-	<form id="form" method="post" action="<%=basePath %>/video/add.do" enctype="multipart/form-data" class="layui-form layui-form-pane">
+	<form id="form" method="post" action="<%=basePath %>/video/add.do" class="layui-form layui-form-pane">
 		<div class="layui-form-item">
 			<label class="layui-form-label">名称</label>
 			<div class="layui-input-block">
@@ -36,13 +36,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					autocomplete="off"></textarea>
 			</div>
 		</div>
-		<div class="layui-form-item">
-			<label class="layui-form-label">图片</label>
-			<div class="layui-input-block">
-				<input type="file" name="fileUrl" lay-verify="required"
-					autocomplete="off" class="layui-input">
-			</div>
-		</div>
+		<button type="button" class="layui-btn" id="upload">
+			<i class="layui-icon">&#xe67c;</i>上传图片
+		</button>
+		<input type="text" id="fileUrl" name="fileUrl" style="display:none;">
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<button class="layui-btn" lay-submit lay-filter="userform">立即提交</button>
@@ -67,6 +64,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  return false;
 			});
 		});
-		    
+		layui.use('upload', function() {
+			var upload = layui.upload;
+			upload.render({
+				elem : '#upload',
+				url : '<%=basePath %>/video/upload.do',
+				done : function(res) {
+					$("#fileUrl").val(res.data);
+					alert("文件上传成功");
+				},
+				error : function() {
+					alert("文件上传失败");
+				}
+			});
+		});
 </script>
 </html>

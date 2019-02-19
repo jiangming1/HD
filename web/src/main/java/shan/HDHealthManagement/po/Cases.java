@@ -1,7 +1,10 @@
 package shan.HDHealthManagement.po;
 
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
+/**
+ * 案例实体类
+ * @author 18732
+ *
+ */
 public class Cases {
 	private Long id;
 	private String caseName;
@@ -10,7 +13,7 @@ public class Cases {
 	private String doctor;
 	private String hospital;
 	private String introduce;
-	private String file;
+	private String fileUrl;
 	
 	public Long getId() {
 		return id;
@@ -54,10 +57,11 @@ public class Cases {
 	public void setIntroduce(String introduce) {
 		this.introduce = introduce;
 	}
-	public String getFile() {
-		return file;
+	public String getFileUrl() {
+		return fileUrl;
 	}
-	public void setFile(String file) {
-		this.file = file;
+	public void setFileUrl(String fileUrl) {
+		this.fileUrl = fileUrl;
 	}
+
 }
