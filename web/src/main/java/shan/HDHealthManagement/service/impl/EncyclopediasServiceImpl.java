@@ -41,4 +41,15 @@ public class EncyclopediasServiceImpl implements EncyclopediasService {
 		encyclopediasDao.del(id);
 	}
 
+	public List<Encyclopedias> getAllByName(String name) {
+		name = "%"+name+"%";
+		return encyclopediasDao.getAllByName(name);
+	}
+
+	public List<Encyclopedias> getPageByName(Integer page, Integer rows,String name) {
+		Integer index = (page-1)*rows;
+		name = "%"+name+"%";
+		return encyclopediasDao.getPageByName(name, index, rows);
+	}
+
 }

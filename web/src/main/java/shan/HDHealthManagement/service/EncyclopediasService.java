@@ -20,6 +20,19 @@ public interface EncyclopediasService {
 	public List<Encyclopedias> getByPage(Integer page,Integer rows);
 	
 	/**
+	 * 根据名称查询所有小百科
+	 * @return
+	 */
+	public List<Encyclopedias> getAllByName(String name);
+	
+	/**
+	 * 根据名称分页查询小百科
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	public List<Encyclopedias> getPageByName(Integer page,Integer rows,String name);
+	/**
 	 * 添加小百科
 	 */
 	public void add(Encyclopedias encyclopedias);

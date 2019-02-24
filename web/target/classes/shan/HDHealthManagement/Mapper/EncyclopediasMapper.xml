@@ -11,6 +11,14 @@
         select * from encyclopedias  LIMIT #{index},#{rows}
     </select>
     
+    <select id="getAllByName" resultType="shan.HDHealthManagement.po.Encyclopedias">
+        select * from encyclopedias where name like #{name}
+    </select>
+    
+    <select id="getPageByName" resultType="shan.HDHealthManagement.po.Encyclopedias">
+        select * from encyclopedias where name like #{name} LIMIT #{index},#{rows}
+    </select>
+    
     <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="shan.HDHealthManagement.po.Encyclopedias">
         insert into encyclopedias(id,name,introduce,fileUrl)
         values(#{id},#{name},#{introduce},#{fileUrl})

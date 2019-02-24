@@ -41,4 +41,15 @@ public class VideoServiceImpl implements VideoService {
 		videoDao.del(id);
 	}
 
+	public List<Video> getAllByName(String name) {
+		name = "%"+name+"%";
+		return videoDao.getAllByName(name);
+	}
+
+	public List<Video> getPageByName(String name, Integer page, Integer rows) {
+		Integer index = (page-1)*rows;
+		name = "%"+name+"%";
+		return videoDao.getPageByName(name, index, rows);
+	}
+
 }

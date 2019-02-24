@@ -20,6 +20,20 @@ public interface VideoService {
 	public List<Video> getByPage(Integer page,Integer rows);
 	
 	/**
+	 * 根据名称查询所有视频
+	 * @return
+	 */
+	public List<Video> getAllByName(String name);
+	
+	/**
+	 * 根据名称分页查询视频
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	public List<Video> getPageByName(String name,Integer page,Integer rows);
+	
+	/**
 	 * 添加视频
 	 */
 	public void add(Video video);

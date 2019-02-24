@@ -64,12 +64,12 @@
 					+ myMonth + "." + myDay;
 		}
 
-	/* 	$(document).keydown(function(event) {
+	 /* 	$(document).keydown(function(event) {
 			alert(event.keyCode);
-			if (event.keyCode == 13) {
+			if (event.keyCode == 116) {
 				alert('你按下了Enter');
 			}
-		}); */
+		});  */
 	</script>
 </body>
 </html>

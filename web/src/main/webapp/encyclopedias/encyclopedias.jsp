@@ -17,21 +17,20 @@
  <script src="<%=basePath %>/layui/layui.all.js"></script>
 </head>
 <body>
+
 	<table class="layui-hide" id="dg" lay-filter="dgtool"></table>
 	<script type="text/html" id="bar1">
-	<div class="layui-btn-group">
-	<button onclick="add()" class="layui-btn">增加</button>
-	<button onclick="dels()" class="layui-btn">删除</button>
+	<div  class="layui-form-item">
+		<button onclick="add()" class="layui-btn">增加</button>
+		<button onclick="dels()" class="layui-btn">删除</button>
+		<button onclick="select()" class="layui-btn" style="margin-left:190px;">搜索</button>
+		<input id="select" type="text" placeholder="搜索" class="layui-input" style="width:160px;margin-top: -37px;margin-left:160px;">
 	</div>
 </script>
 <script type="text/html" id="bar2">
 	<div class="layui-btn-group">
-		<button lay-event="edit" class="layui-btn layui-btn-sm">
-		<i class="layui-icon">&#xe642;</i>
-		</button>
-		<button lay-event="del" class="layui-btn layui-btn-sm">
-		<i class="layui-icon">&#xe640;</i>
-		</button>
+		<button lay-event="edit" class="layui-btn layui-btn-sm">修改</button>
+		<button lay-event="del" class="layui-btn layui-btn-sm">删除</button>
 	</div>
 </script>
 	<script type="text/javascript">
@@ -41,13 +40,31 @@
 			  type: 2,
 			  title:"添加小百科",
 			  moveOut:true,
-			  area: ['350px', '350px'],
+			  area: ['350px', '450px'],
 			  offset: '100px',
 			  content: '<%=basePath %>/encyclopedias/add.jsp',
 			  end:function(){
-				  table.reload();
+				  table.reload("dg",{
+						elem : '#dg',
+						even: true,
+						cellMinWidth: 100,
+						toolbar:"#bar1",
+						url : '<%=basePath%>/encyclopedias/getAllByPage.do',
+						method:"post",
+						page : true});
 			  }
 			});
+	}
+	function select(){
+		var name = $("#select").val();
+		table.reload("dg",{
+			elem : '#dg',
+			cellMinWidth: 100,
+			toolbar:"#bar1",
+			where: { name:name},
+			url : "<%=basePath%>/encyclopedias/getAllByName.do",
+			method:"post",
+			page : true});
 	}
 	function edit(id){
 		layer.open({
@@ -56,7 +73,17 @@
 			  moveOut:true,
 			  area: ['350px', '450px'],
 			  offset: '100px',
-			  content: '<%=basePath %>/encyclopedias/editJsp.do?id='+id
+			  content: '<%=basePath %>/encyclopedias/editJsp.do?id='+id,
+			  end:function(){
+				  table.reload("dg",{
+						elem : '#dg',
+						even: true,
+						cellMinWidth: 100,
+						toolbar:"#bar1",
+						url : '<%=basePath%>/encyclopedias/getAllByPage.do',
+						method:"post",
+						page : true});
+			  }
 			});
 	}
 	function dels(){
@@ -83,11 +110,10 @@
 			table = layui.table;
 			table.render({
 				elem : '#dg',
-				even: true,
 				cellMinWidth: 100,
-				toolbar:"#bar1",
 				url : '<%=basePath%>/encyclopedias/getAllByPage.do',
 				method:"post",
+				toolbar:"#bar1",
 				page : true,
 				cols : [[{
 					field : 'id',

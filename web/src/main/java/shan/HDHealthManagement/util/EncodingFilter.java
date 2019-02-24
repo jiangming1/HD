@@ -1,6 +1,8 @@
 package shan.HDHealthManagement.util;
 
 import java.io.IOException;
+import java.util.Map;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -30,6 +32,15 @@ public class EncodingFilter extends HttpServlet implements Filter {
 		try {
 			request.setCharacterEncoding(trargetEncoding);
 			response.setCharacterEncoding(trargetEncoding);
+	/*		Map<String , String[] > map= request.getParameterMap();
+			for (String iterable_element : map.keySet()) {
+				System.out.println(iterable_element);
+			}
+			for (String[] iterable_element : map.values()) {
+				for (String string : iterable_element) {
+					System.out.println(string);
+				}
+			}*/
 			filterChain.doFilter(request, response);
 		} catch (ServletException sx) {
 			filterConfig.getServletContext().log(sx.getMessage());

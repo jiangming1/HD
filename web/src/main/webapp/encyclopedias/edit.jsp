@@ -40,18 +40,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					autocomplete="off"><%=encyclopedias.getIntroduce() %></textarea>
 			</div>
 		</div>
-		<button type="button" class="layui-btn" id="upload">
-			<i class="layui-icon">&#xe67c;</i>上传图片
-		</button>
-		
 		<input type="text" id="fileUrl" name="fileUrl" style="display:none;" value="<%=encyclopedias.getFileUrl() %>">
 		<div class="layui-form-item">
 			<img height="100" width="100" id="file" src="<%=encyclopedias.getFileUrl() %>">
+			<button type="button" class="layui-btn" id="upload">
+				<i class="layui-icon">&#xe67c;</i>上传图片
+			</button>
 		</div>
+		
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<button class="layui-btn"  lay-filter="userform" lay-submit>立即提交</button>
-				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 			</div>
 		</div>
 	</form>

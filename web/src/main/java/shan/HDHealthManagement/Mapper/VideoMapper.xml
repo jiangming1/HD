@@ -11,6 +11,14 @@
         select * from video  LIMIT #{index},#{rows}
     </select>
     
+    <select id="getAllByName" resultType="shan.HDHealthManagement.po.Video">
+        select * from video where name like #{name}
+    </select>
+    
+    <select id="getPageByName" resultType="shan.HDHealthManagement.po.Video">
+        select * from video where name like #{name} LIMIT #{index},#{rows}
+    </select>
+    
     <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="shan.HDHealthManagement.po.Video">
         insert into video(id,name,introduce,fileUrl)
         values(#{id},#{name},#{introduce},#{fileUrl})

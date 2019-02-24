@@ -22,6 +22,20 @@ public interface EncyclopediasDao {
 	public List<Encyclopedias> getByPage(@Param("index")Integer index,@Param("rows")Integer rows);
 	
 	/**
+	 * 根据名称查询所有小百科
+	 * @return
+	 */
+	public List<Encyclopedias> getAllByName(@Param("name")String name);
+	
+	/**
+	 * 根据名称分页查询小百科
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	public List<Encyclopedias> getPageByName(@Param("name")String name,@Param("index")Integer index,@Param("rows")Integer rows);
+	
+	/**
 	 * 添加小百科
 	 */
 	public void add(Encyclopedias encyclopedias);

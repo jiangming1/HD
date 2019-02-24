@@ -47,6 +47,24 @@ public class EncyclopediasAction {
 		}
 	}
 	
+	@RequestMapping(value="/getAllByName")
+	public void getAllByName(@RequestParam("page") Integer page,@RequestParam("limit") Integer rows,@RequestParam("name") String name,HttpServletRequest request,HttpServletResponse response){
+		try {
+			PrintWriter out = response.getWriter();
+			Integer count = encyclopediasService.getAllByName(name).size();
+			List<Encyclopedias> list= encyclopediasService.getPageByName(page, rows, name);
+			JSONArray json = JSONArray.fromObject(list);
+			JSONObject object = new JSONObject();
+			object.put("data", json);
+			object.put("count", count);
+			object.put("code", 0);
+			object.put("msg", "");
+			out.write(object.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@RequestMapping(value="/add.do")
 	@ResponseBody
 	public void add(Encyclopedias encyclopedias,

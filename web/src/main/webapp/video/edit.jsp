@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="<%=basePath %>/layui/layui.js"></script>
 </head>
 <body>
-	<form id="form" method="post" action="<%=basePath %>/video/edit.do" enctype="multipart/form-data" class="layui-form layui-form-pane">
+	<form id="form" method="post" action="<%=basePath %>/video/edit.do" class="layui-form layui-form-pane">
 	<%
 	Video video = (Video)request.getAttribute("video");
 	%>
@@ -41,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 		<button type="button" class="layui-btn" id="upload">
-			<i class="layui-icon">&#xe67c;</i>上传图片
+			<i class="layui-icon">&#xe67c;</i>上传视频
 		</button>
 		
 		<input type="text" id="fileUrl" name="fileUrl" style="display:none;" value="<%=video.getFileUrl() %>">
@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  var form = layui.form;
 		  form.on('submit(userform)', function(data){
 			  $("#form").ajaxSubmit(function(data){
-					if(data=="<pre>suc</pre>"){
+					if(data=="suc"){
 						layer.alert('保存成功!', function(){
 							var index = parent.layer.getFrameIndex(window.name);
 							parent.layer.close(index);

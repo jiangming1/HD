@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import shan.HDHealthManagement.po.Encyclopedias;
 import shan.HDHealthManagement.po.Video;
 import shan.HDHealthManagement.service.VideoService;
 
@@ -34,6 +35,24 @@ public class VideoAction {
 			PrintWriter out = response.getWriter();
 			Integer count = videoService.getAll().size();
 			List<Video> list= videoService.getByPage(page, rows);
+			JSONArray json = JSONArray.fromObject(list);
+			JSONObject object = new JSONObject();
+			object.put("data", json);
+			object.put("count", count);
+			object.put("code", 0);
+			object.put("msg", "");
+			out.write(object.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value="/getAllByName")
+	public void getAllByName(@RequestParam("page") Integer page,@RequestParam("limit") Integer rows,@RequestParam("name") String name,HttpServletRequest request,HttpServletResponse response){
+		try {
+			PrintWriter out = response.getWriter();
+			Integer count = videoService.getAllByName(name).size();
+			List<Video> list= videoService.getPageByName(name, page, rows);
 			JSONArray json = JSONArray.fromObject(list);
 			JSONObject object = new JSONObject();
 			object.put("data", json);

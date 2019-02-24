@@ -19,9 +19,11 @@
 <body>
 	<table class="layui-hide" id="dg" lay-filter="dgtool"></table>
 	<script type="text/html" id="bar1">
-	<div class="layui-btn-group">
-	<button onclick="add()" class="layui-btn">增加</button>
-	<button onclick="dels()" class="layui-btn">删除</button>
+	<div  class="layui-form-item">
+		<button onclick="add()" class="layui-btn">增加</button>
+		<button onclick="dels()" class="layui-btn">删除</button>
+		<button onclick="select()" class="layui-btn" style="margin-left:190px;">搜索</button>
+		<input id="select" type="text" placeholder="搜索" class="layui-input" style="width:160px;margin-top: -37px;margin-left:160px;">
 	</div>
 </script>
 <script type="text/html" id="bar2">
@@ -45,6 +47,17 @@
 			  offset: '100px',
 			  content: '<%=basePath %>/video/add.jsp'
 			});
+	}
+	function select(){
+		var name = $("#select").val();
+		table.reload("dg",{
+			elem : '#dg',
+			cellMinWidth: 100,
+			toolbar:"#bar1",
+			where: { name:name},
+			url : "<%=basePath%>/video/getAllByName.do",
+			method:"post",
+			page : true});
 	}
 	function edit(id){
 		layer.open({
@@ -80,7 +93,6 @@
 			table = layui.table;
 			table.render({
 				elem : '#dg',
-				even: true,
 				cellMinWidth: 100,
 				toolbar:"#bar1",
 				url : '<%=basePath%>/video/getAllByPage.do',

@@ -36,18 +36,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					autocomplete="off"></textarea>
 			</div>
 		</div>
-		<button type="button" class="layui-btn" id="upload">
-			<i class="layui-icon">&#xe67c;</i>上传图片
-		</button>
 		
 		<input type="text" id="fileUrl" name="fileUrl" style="display:none;">
-		<div class="layui-form-item">
+		<div class="layui-form-item" style="margin-left:10px;">
 			<img height="100" width="100" id="file" src="">
+			<button type="button" class="layui-btn" id="upload">
+				<i class="layui-icon">&#xe67c;</i>上传图片
+			</button>
 		</div>
+		
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<button class="layui-btn" lay-submit lay-filter="userform">立即提交</button>
-				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 			</div>
 		</div>
 	</form>
@@ -73,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			upload.render({
 				elem : '#upload',
 				accept:'image',
-				acceptMime: 'image/jpg, image/png',
+				acceptMime: 'image/*',
 				url : '<%=basePath %>/encyclopedias/upload.do',
 				done : function(res) {
 					$("#fileUrl").val(res.data);

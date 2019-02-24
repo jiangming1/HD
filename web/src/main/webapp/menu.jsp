@@ -49,6 +49,16 @@
 			 $('#rightMain').attr('src',node.accessPath);
 		}
 	});
+	layui.tree({
+		elem : '#tab3',
+		nodes : [{
+			name : "积分管理",
+			"accessPath" : "integral/integral.jsp",
+		}],
+		click : function(node) {
+			 $('#rightMain').attr('src',node.accessPath);
+		}
+	});
 	$(function(){
 		$("#tab2").hide();
 		$("#tab3").hide();
