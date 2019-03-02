@@ -43,31 +43,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 		<div class="layui-form-item">
-			<label class="layui-form-label">权限</label>
-			<input id="jurisdiction" type="text" name="jurisdiction" style="display:none;">
-			<div id="xtree"></div>
-		</div>
-		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<button class="layui-btn" lay-submit lay-filter="userform">立即提交</button>
-				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 			</div>
 		</div>
 	</form>
 	<script>
-	function getCheck(tree){
-		var treeChick = [];
-		for(var i =0;i<tree.length;i++){
-			treeChick.push(tree[i].value);
-		}
-		return treeChick;
-	}
-	
 		layui.use('form', function(){
 		  var form = layui.form;
 		  form.on('submit(userform)', function(data){
-			  var treeChick = getCheck(xtree.GetChecked());
-			  $("#jurisdiction").val(treeChick);
 			  $("#form").ajaxSubmit(function(data){
 					if(data=="suc"){
 						layer.alert('保存成功!', function(){
@@ -79,12 +63,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					}
 				});
 			  return false;
-			});
-			var xtree = new layuiXtree({
-				elem: 'xtree',
-		        form: form,
-				data: <%=request.getAttribute("data")%>,
-				isopen : false
 			});
 		});
 	</script>

@@ -69,7 +69,7 @@ public interface RoleDao {
 	 * @param roleId
 	 * @param jurisdiction
 	 */
-	public void delRoleJurisdiction(Long roleId,Long jurisdictionId);
+	public void delRoleJurisdiction(@Param("roleId")Long roleId,@Param("jurisdictionId")Long jurisdictionId);
 	/**
 	 * 查询角色权限
 	 * @param roleId

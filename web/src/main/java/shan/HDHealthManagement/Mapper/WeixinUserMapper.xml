@@ -10,5 +10,9 @@
     <select id="getByPage" resultType="shan.HDHealthManagement.po.WeixinUser">
         select * from weixinUser  LIMIT #{index},#{rows}
     </select>
+    
+    <select id="record" resultType="shan.HDHealthManagement.po.IntegralRecord">
+        select * from integralRecord where weixinId = #{weixinId}
+    </select>
 
 </mapper>

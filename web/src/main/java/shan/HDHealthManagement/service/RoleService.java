@@ -22,17 +22,17 @@ public interface RoleService {
 	public List<Role> getByPage(Integer page,Integer rows);
 	
 	/**
-	 * 添加benner
+	 * 添加角色
 	 */
-	public void add(Role role,String jurisdiction);
+	public void add(Role role);
 	
 	/**
-	 * 修改benner
+	 * 修改角色
 	 */
-	public void edit(Role role,String jurisdiction);
+	public void edit(Role role);
 	
 	/**
-	 * 根据id查询benner
+	 * 根据id查询角色
 	 * @param id
 	 * @return
 	 */
@@ -44,17 +44,18 @@ public interface RoleService {
 	public void del(Long id);
 	
 	/**
-	 * 查询所有权限
-	 * @return
-	 */
-	public String getAllJurisdiction();
-	
-	/**
 	 * 根据角色查询所有权限
 	 * @param roleId
 	 * @return
 	 */
 	public String getAllJurisdictionById(Long roleId);
+	
+	/**
+	 * 修改角色所有权限
+	 * @param treeChecked
+	 * @param id
+	 */
+	public void editJurisdiction(String treeChecked,Long id);
 	/**
 	 * 查询角色权限
 	 * @param roleId

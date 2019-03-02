@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="<%=basePath %>/layui/layui.js"></script>
 </head>
 <body>
-	<form id="form" method="post" action="<%=basePath %>/cases/edit.do" enctype="multipart/form-data" class="layui-form layui-form-pane">
+	<form id="form" method="post" action="cases/edit.do" class="layui-form layui-form-pane">
 	<%
 	Cases cases = (Cases)request.getAttribute("cases");
 	%>
@@ -43,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="layui-form-item">
 			<label class="layui-form-label">年龄</label>
 			<div class="layui-input-block">
-				<input type="text" name="age" value="<%=cases.getAge() %>" placeholder="请输入" lay-verify="required"
+				<input type="text" name="age" value="<%=cases.getAge() %>" placeholder="请输入" lay-verify="required|number"
 					autocomplete="off" class="layui-input">
 			</div>
 		</div>
@@ -64,17 +64,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="layui-form-item">
 			<label class="layui-form-label">介绍</label>
 			<div class="layui-input-block">
-				<textarea rows="5" cols="30" value="<%=cases.getIntroduce() %>" name="introduce" placeholder="请输入" lay-verify="required"
-					autocomplete="off"></textarea>
+				<textarea rows="5" cols="30" name="introduce" placeholder="请输入" lay-verify="required"
+					autocomplete="off"><%=cases.getIntroduce() %></textarea>
 			</div>
 		</div>
-		<button type="button" class="layui-btn" id="upload">
-			<i class="layui-icon">&#xe67c;</i>上传图片
-		</button>
+		
 		
 		<input type="text" id="fileUrl" name="fileUrl" style="display:none;" value="<%=cases.getFileUrl() %>">
-		<div class="layui-form-item">
+		<div class="layui-form-item" style="margin-left:10px;">
 			<img height="100" width="100" id="file" src="<%=cases.getFileUrl() %>">
+			<button type="button" class="layui-btn" id="upload">
+				<i class="layui-icon">&#xe67c;</i>上传图片
+			</button>
 		</div>
 		<div class="layui-form-item">
 			<div class="layui-input-block">
@@ -88,7 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  var form = layui.form;
 		  form.on('submit(userform)', function(data){
 			  $("#form").ajaxSubmit(function(data){
-					if(data=="<pre>suc</pre>"){
+					if(data=="suc"){
 						layer.alert('保存成功!', function(){
 							var index = parent.layer.getFrameIndex(window.name);
 							parent.layer.close(index);

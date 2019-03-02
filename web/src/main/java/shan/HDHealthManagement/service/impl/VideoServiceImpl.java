@@ -24,6 +24,10 @@ public class VideoServiceImpl implements VideoService {
 		Integer index = (page-1)*rows;
 		return videoDao.getByPage(index, rows);
 	}
+	
+	public List<Video> getAhead(){
+		return videoDao.getAhead();
+	}
 
 	public void add(Video video) {
 		videoDao.add(video);

@@ -24,6 +24,10 @@ public class EncyclopediasServiceImpl implements EncyclopediasService {
 		Integer index = (page-1)*rows;
 		return encyclopediasDao.getByPage(index, rows);
 	}
+	
+	public List<Encyclopedias> getAhead(){
+		return encyclopediasDao.getAhead();
+	}
 
 	public void add(Encyclopedias encyclopedias) {
 		encyclopediasDao.add(encyclopedias);

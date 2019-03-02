@@ -1,7 +1,9 @@
 package shan.HDHealthManagement.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -30,46 +32,12 @@ public class RoleServiceImpl implements RoleService {
 		return roleDao.getByPage(index, rows);
 	}
 
-	public void add(Role role,String jurisdiction) {
+	public void add(Role role) {
 		roleDao.add(role);
-		for(String string:jurisdiction.split(",")){
-			if(!"".equals(string)){
-				RoleJurisdiction roleJurisdiction = new RoleJurisdiction();
-				roleJurisdiction.setRoleId(role.getId());
-				roleJurisdiction.setJurisdictionId(Long.valueOf(string));
-				roleDao.addRoleJurisdiction(roleJurisdiction);
-			}
-		}
 	}
 
-	public void edit(Role role,String jurisdiction) {
+	public void edit(Role role) {
 		roleDao.edit(role);
-		List<RoleJurisdiction> roleJurisdictions = roleDao.findRoleJurisdictions(role.getId());
-		List<String> list = new ArrayList<String>();
-		List<String> newList = new ArrayList<String>();
-		for (RoleJurisdiction roleJurisdiction : roleJurisdictions) {
-			list.add(roleJurisdiction.getJurisdictionId().toString());
-		}
-		for(String string:jurisdiction.split(",")){
-			if(!"".equals(string)){
-				newList.add(string);
-			}
-		}
-		list.removeAll(newList);
-		for (String string : list) {
-			roleDao.delRoleJurisdiction(role.getId(), Long.valueOf(string));
-		}
-		list = new ArrayList<String>();
-		for (RoleJurisdiction roleJurisdiction : roleJurisdictions) {
-			list.add(roleJurisdiction.getJurisdictionId().toString());
-		}
-		newList.removeAll(list);
-		for (String string : newList) {
-			RoleJurisdiction roleJurisdiction = new RoleJurisdiction();
-			roleJurisdiction.setRoleId(role.getId());
-			roleJurisdiction.setJurisdictionId(Long.valueOf(string));
-			roleDao.addRoleJurisdiction(roleJurisdiction);
-		}
 	}
 
 	public Role findById(Long id) {
@@ -78,29 +46,6 @@ public class RoleServiceImpl implements RoleService {
 
 	public void del(Long id) {
 		roleDao.del(id);
-	}
-
-	public String getAllJurisdiction() {
-		List<Jurisdiction> list = roleDao.getJurisdictionParent();
-		JSONArray array = new JSONArray();
-		for (Jurisdiction jurisdiction : list) {
-			JSONObject object = new JSONObject();
-			object.put("title", jurisdiction.getZhName());
-			object.put("value", jurisdiction.getId());
-			List<Jurisdiction> childList = roleDao.getJurisdictionByParentId(jurisdiction.getId());
-			if(childList!=null && childList.size()!=0){
-				JSONArray childArray = new JSONArray();
-				for (Jurisdiction child : childList) {
-					JSONObject childObject = new JSONObject();
-					childObject.put("title", child.getZhName());
-					childObject.put("value", child.getId());
-					childArray.add(childObject);
-				}
-				object.put("data", childArray);
-			}
-			array.add(object);
-		}
-		return array.toString();
 	}
 
 	public String getAllJurisdictionById(Long roleId) {
@@ -140,5 +85,34 @@ public class RoleServiceImpl implements RoleService {
 
 	public Jurisdiction findJurisdictionById(Long id){
 		return roleDao.findJurisdictionById(id);
+	}
+
+	public void editJurisdiction(String treeChecked, Long id) {
+		List<RoleJurisdiction> list = roleDao.findRoleJurisdictions(id);
+		Set<String> old = new HashSet<String>();
+		Set<String> news = new HashSet<String>();
+		for (RoleJurisdiction roleJurisdiction : list) {
+			old.add(roleJurisdiction.getJurisdictionId().toString());
+		}
+		for(String string:treeChecked.split(",")){
+			if(!"".equals(string)){
+				news.add(string);
+			}
+		}
+		for (RoleJurisdiction roleJurisdiction : list) {
+			if(news.add(roleJurisdiction.getJurisdictionId().toString())){
+				roleDao.delRoleJurisdiction(id, roleJurisdiction.getJurisdictionId());
+			}
+		}
+		for(String string:treeChecked.split(",")){
+			if(!"".equals(string)){
+				if(old.add(string)){
+					RoleJurisdiction roleJurisdiction = new RoleJurisdiction();
+					roleJurisdiction.setRoleId(id);
+					roleJurisdiction.setJurisdictionId(Long.valueOf(string));
+					roleDao.addRoleJurisdiction(roleJurisdiction);
+				}
+			}
+		}
 	}
 }

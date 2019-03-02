@@ -138,6 +138,10 @@ layuiXtree.prototype.dataBind = function (d) {
     }
 }
 
+layuiXtree.prototype.Render = function (obj) {
+	
+}
+
 //渲染呈现
 layuiXtree.prototype.Rendering = function () {
     var _this = this;

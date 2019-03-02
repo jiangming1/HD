@@ -46,36 +46,48 @@ public class RoleAction {
 
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
-	public void add(Role role,@RequestParam("jurisdiction")String jurisdiction,HttpServletResponse response) {
+	public void add(Role role,HttpServletResponse response) {
 		try {
 			PrintWriter out = response.getWriter();
-			roleService.add(role,jurisdiction);
+			roleService.add(role);
 			out.write("suc");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
-	@RequestMapping(value = "/addJsp.do")
-	public String addJsp(HttpServletRequest request) {
-		request.setAttribute("data", roleService.getAllJurisdiction());
-		return "role/add";
+	@RequestMapping(value = "/editJurisdiction.do")
+	@ResponseBody
+	public void editJurisdiction(@RequestParam("treeChecked")String treeChecked,@RequestParam("id")String id,HttpServletResponse response) {
+		try {
+			PrintWriter out = response.getWriter();
+			roleService.editJurisdiction(treeChecked, Long.valueOf(id));;
+			out.write("suc");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
 	@RequestMapping(value = "/editJsp.do")
 	public String editJsp(@RequestParam("id") Long id,
 			HttpServletRequest request) {
 		request.setAttribute("role", roleService.findById(id));
-		request.setAttribute("data", roleService.getAllJurisdictionById(id));
 		return "role/edit";
+	}
+	@RequestMapping(value = "/jurisdiction.do")
+	public void jurisdiction(@RequestParam("id") Long id,HttpServletResponse response) {
+		try {
+			PrintWriter out = response.getWriter();
+			out.write(roleService.getAllJurisdictionById(id));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@RequestMapping(value = "/edit.do")
 	@ResponseBody
-	public void edit(Role role,@RequestParam("jurisdiction")String jurisdiction,HttpServletResponse response) {
+	public void edit(Role role,HttpServletResponse response) {
 		try {
 			PrintWriter out = response.getWriter();
-			roleService.edit(role,jurisdiction);
+			roleService.edit(role);
 			out.write("suc");
 		} catch (IOException e) {
 			e.printStackTrace();

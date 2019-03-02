@@ -22,6 +22,26 @@ public interface CasesDao {
 	public List<Cases> getByPage(@Param("index")Integer index,@Param("rows")Integer rows);
 	
 	/**
+	 * 根据名称查询所有案例
+	 * @return
+	 */
+	public List<Cases> getAllByName(@Param("name")String name);
+	
+	/**
+	 * 根据名称分页查询案例
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	public List<Cases> getPageByName(@Param("name")String name,@Param("index")Integer index,@Param("rows")Integer rows);
+	
+	/**
+	 * 查询前4个
+	 * @return
+	 */
+	public List<Cases> getAhead();
+	
+	/**
 	 * 添加案例
 	 */
 	public void add(Cases cases);

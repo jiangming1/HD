@@ -11,6 +11,10 @@
         select * from expert  LIMIT #{index},#{rows}
     </select>
     
+    <select id="getAhead" resultType="shan.HDHealthManagement.po.Expert">
+        select * from expert  LIMIT 4
+    </select>
+    
     <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="shan.HDHealthManagement.po.Expert">
         insert into expert(id,hospital,recommend,letter,gift,department,specialize,introduction,region,file)
         values(#{id},#{hospital},#{recommend},#{letter},#{gift},#{department},#{specialize},#{introduction},#{region},#{file})

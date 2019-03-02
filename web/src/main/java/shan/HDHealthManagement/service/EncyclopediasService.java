@@ -20,6 +20,12 @@ public interface EncyclopediasService {
 	public List<Encyclopedias> getByPage(Integer page,Integer rows);
 	
 	/**
+	 * 查询前4个
+	 * @return
+	 */
+	public List<Encyclopedias> getAhead();
+	
+	/**
 	 * 根据名称查询所有小百科
 	 * @return
 	 */

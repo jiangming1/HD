@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.apache.commons.io.FileUtils;
-import org.json.JSONObject;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +22,13 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import shan.HDHealthManagement.po.Expert;
 import shan.HDHealthManagement.service.ExpertService;
 
+/**
+ * 专家请求处理类
+ * @author 18732
+ *
+ */
+@Controller
+@RequestMapping(value = "/expert")
 public class ExpertAction {
 	@Resource(name = "expertService")
 	private ExpertService expertService;
@@ -43,37 +51,48 @@ public class ExpertAction {
 		}
 	}
 	
-	@RequestMapping(value="/add.do")
+	/**
+	 * 查询前4个数据显示
+	 * @param response
+	 */
+	@RequestMapping(value="/getAhead.do")
 	@ResponseBody
-	public void add(@RequestParam("fileUrl") CommonsMultipartFile file,
-            HttpServletRequest request,HttpServletResponse response) {
+	public void getAhead(HttpServletResponse response){
 		try {
 			PrintWriter out = response.getWriter();
-			if (!file.isEmpty()) {
-	            String type = file.getOriginalFilename().substring(
-	                    file.getOriginalFilename().indexOf("."));// 取文件格式后缀名
-	            String filename = System.currentTimeMillis() + type;// 取当前时间戳作为文件名
-	            String path = request.getSession().getServletContext()
-	                    .getRealPath("/expertFile/" + filename);// 存放位置
-	            File destFile = new File(path);
-	            try {
-	                FileUtils.copyInputStreamToFile(file.getInputStream(), destFile);// 复制临时文件到指定目录下
-	                Expert expert = new Expert();
-	                expert.setHospital(request.getParameter("hospital"));
-	    			expert.setRecommend(Integer.valueOf(request.getParameter("recommend")));
-	    			expert.setLetter(Integer.valueOf(request.getParameter("letter")));
-	    			expert.setGift(Integer.valueOf(request.getParameter("gift")));
-	    			expert.setDepartment(request.getParameter("department"));
-	    			expert.setSpecialize(request.getParameter("specialize"));
-	    			expert.setIntroduction(request.getParameter("introduction"));
-	    			//expert.setRegion(region);
-	                expert.setFile("/expertFile/" + filename);
-	                expertService.add(expert);
-	                out.write("suc");
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	            }
-	        }
+			List<Expert> list= expertService.getAhead();
+			JSONArray json = JSONArray.fromObject(list);
+			out.write(json.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 根据id查询显示
+	 * @param id
+	 * @param response
+	 */
+	@RequestMapping(value="/getById.do")
+	@ResponseBody
+	public void getById(@RequestParam("id") Long id,HttpServletResponse response){
+		try {
+			PrintWriter out = response.getWriter();
+			Expert expert = expertService.findById(id);
+			JSONObject object = JSONObject.fromObject(expert);
+			out.write(object.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value="/add.do")
+	@ResponseBody
+	public void add(Expert expert, HttpServletRequest request,HttpServletResponse response) {
+		try {
+			PrintWriter out = response.getWriter();
+            expertService.add(expert);
+            out.write("suc");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -88,33 +107,9 @@ public class ExpertAction {
 	
 	@RequestMapping(value="/edit.do")
 	@ResponseBody
-	public void edit(@RequestParam(value="fileUrl",required=false) CommonsMultipartFile file,
-            HttpServletRequest request,HttpServletResponse response){
+	public void edit(Expert expert, HttpServletRequest request,HttpServletResponse response){
 		try {
 			PrintWriter out = response.getWriter();
-			Expert expert = expertService.findById(Long.valueOf(request.getParameter("id")));
-			if (!file.isEmpty()) {
-	            String type = file.getOriginalFilename().substring(
-	                    file.getOriginalFilename().indexOf("."));// 取文件格式后缀名
-	            String filename = System.currentTimeMillis() + type;// 取当前时间戳作为文件名
-	            String path = request.getSession().getServletContext()
-	                    .getRealPath("/expertFile/" + filename);// 存放位置
-	            File destFile = new File(path);
-	            try {
-	                FileUtils.copyInputStreamToFile(file.getInputStream(), destFile);// 复制临时文件到指定目录下
-	                expert.setFile("/expertFile/" + filename);
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	            }
-	        }
-			expert.setHospital(request.getParameter("hospital"));
-			expert.setRecommend(Integer.valueOf(request.getParameter("recommend")));
-			expert.setLetter(Integer.valueOf(request.getParameter("letter")));
-			expert.setGift(Integer.valueOf(request.getParameter("gift")));
-			expert.setDepartment(request.getParameter("department"));
-			expert.setSpecialize(request.getParameter("specialize"));
-			expert.setIntroduction(request.getParameter("introduction"));
-			//expert.setRegion(region);
             expertService.edit(expert);
             out.write("suc");
 		} catch (IOException e) {
@@ -148,5 +143,34 @@ public class ExpertAction {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * 文件上传
+	 * @param file
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value="/upload.do")
+	@ResponseBody
+	public void upload(@RequestParam(value="file",required=false) CommonsMultipartFile file,
+            HttpServletRequest request,HttpServletResponse response){
+		if (!file.isEmpty()) {
+            String type = file.getOriginalFilename().substring(
+                    file.getOriginalFilename().indexOf("."));// 取文件格式后缀名
+            String filename = System.currentTimeMillis() + type;// 取当前时间戳作为文件名
+            String path = request.getSession().getServletContext()
+                    .getRealPath("/expertFile/" + filename);// 存放位置
+            File destFile = new File(path);
+            try {
+        		PrintWriter out = response.getWriter();
+                FileUtils.copyInputStreamToFile(file.getInputStream(), destFile);// 复制临时文件到指定目录下
+                JSONObject object = new JSONObject();
+    			object.put("data", "expertFile/" + filename);
+    			object.put("code", 0);
+    			object.put("msg", "");
+    			out.write(object.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+	}
 }

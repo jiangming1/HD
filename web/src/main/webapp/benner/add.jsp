@@ -6,20 +6,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-<head>
-<base href="<%=basePath%>">
-<title>My JSP 'add.jsp' starting page</title>
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="cache-control" content="no-cache">
-<meta http-equiv="expires" content="0">
-<script type="text/javascript"
-	src="<%=basePath%>/scripts/jquery/jquery-1.7.1.js"></script>
-	<script type="text/javascript"
-	src="<%=basePath%>/scripts/Myjquery.form.js"></script>
-<link rel="stylesheet" href="<%=basePath %>/layui/css/layui.css"
-	media="all">
-<script src="<%=basePath %>/layui/layui.js"></script>
-</head>
+	<head>
+	<base href="<%=basePath%>">
+	<title>添加轮播图</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<script type="text/javascript" src="<%=basePath%>/scripts/jquery/jquery-1.7.1.js"></script>
+	<script type="text/javascript" src="<%=basePath%>/scripts/Myjquery.form.js"></script>
+	<link rel="stylesheet" href="<%=basePath %>/layui/css/layui.css" media="all">
+	<script src="<%=basePath %>/layui/layui.js"></script>
+	</head>
 <body>
 	<form id="form" method="post" action="<%=basePath %>/benner/add.do"  class="layui-form layui-form-pane">
 		<div class="layui-form-item">
@@ -36,13 +33,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					autocomplete="off" class="layui-input">
 			</div>
 		</div>
-		<button type="button" class="layui-btn" id="upload">
-			<i class="layui-icon">&#xe67c;</i>上传图片
-		</button>
+		
 		
 		<input type="text" id="fileUrl" name="fileUrl" style="display:none;">
-		<div class="layui-form-item">
+		<div class="layui-form-item" style="margin-left:10px;">
 			<img height="100" width="100" id="file" src="">
+			<button type="button" class="layui-btn" id="upload">
+			<i class="layui-icon">&#xe67c;</i>上传图片
+		</button>
 		</div>
 		<div class="layui-form-item">
 			<div class="layui-input-block">

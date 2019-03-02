@@ -36,6 +36,11 @@ public interface EncyclopediasDao {
 	public List<Encyclopedias> getPageByName(@Param("name")String name,@Param("index")Integer index,@Param("rows")Integer rows);
 	
 	/**
+	 * 查询前4个
+	 * @return
+	 */
+	public List<Encyclopedias> getAhead();
+	/**
 	 * 添加小百科
 	 */
 	public void add(Encyclopedias encyclopedias);

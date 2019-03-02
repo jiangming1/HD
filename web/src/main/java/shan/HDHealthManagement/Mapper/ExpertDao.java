@@ -22,6 +22,11 @@ public interface ExpertDao {
 	public List<Expert> getByPage(@Param("index")Integer index,@Param("rows")Integer rows);
 	
 	/**
+	 * 查询前4个
+	 * @return
+	 */
+	public List<Expert> getAhead();
+	/**
 	 * 添加专家
 	 */
 	public void add(Expert expert);

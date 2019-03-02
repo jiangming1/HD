@@ -46,6 +46,19 @@ public class BennerAction {
 		}
 	}
 	
+	@RequestMapping(value="/getAll.do")
+	@ResponseBody
+	public void getAll(HttpServletResponse response){
+		try {
+			PrintWriter out = response.getWriter();
+			List<Benner> list = bennerService.getAll();
+			JSONArray json = JSONArray.fromObject(list);
+			out.write(json.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@RequestMapping(value="/add.do")
 	@ResponseBody
 	public void add(Benner benner,HttpServletResponse response) {
@@ -103,6 +116,12 @@ public class BennerAction {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * 文件上传
+	 * @param file
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value="/upload.do")
 	@ResponseBody
 	public void upload(@RequestParam(value="file",required=false) CommonsMultipartFile file,

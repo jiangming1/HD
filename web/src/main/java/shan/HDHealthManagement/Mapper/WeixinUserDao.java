@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import shan.HDHealthManagement.po.IntegralRecord;
 import shan.HDHealthManagement.po.WeixinUser;
 
 public interface WeixinUserDao {
@@ -20,4 +21,11 @@ public interface WeixinUserDao {
 	 * @return
 	 */
 	public List<WeixinUser> getByPage(@Param("index")Integer index,@Param("rows")Integer rows);
+	
+	/**
+	 * 查询积分记录
+	 * @param weixinId
+	 * @return
+	 */
+	public List<IntegralRecord> record(Long weixinId);
 }

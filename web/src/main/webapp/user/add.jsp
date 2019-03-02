@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="layui-form-item">
 			<label class="layui-form-label">电话</label>
 			<div class="layui-input-block">
-				<input type="text" name="tel" placeholder="请输入" lay-verify="required"
+				<input type="text" name="tel" placeholder="请输入" lay-verify="required|phone"
 					autocomplete="off" class="layui-input">
 			</div>
 		</div>
@@ -59,12 +59,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">角色</label>
+			<input id="role" type="text" name="role" style="display:none;">
 			<div class="layui-input-block">
 			<% 
 				List<Role> list=(List<Role>)request.getAttribute("roles");
 				for(Role role:list){
 			%>
-				<input type="checkbox" name="role" valve='<%=role.getId() %>' title='<%=role.getName() %>' />
+				<input lay-filter="filter"  type="checkbox" name="<%=role.getId() %>" title='<%=role.getName() %>' />
 			<%}%>
 					
 			</div>
@@ -77,9 +78,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</form>
 	<script>
+	var role = [];
 		layui.use('form', function(){
 		  var form = layui.form;
 		  form.on('submit(userform)', function(data){
+			  $("#role").val(role);
 			  $("#form").ajaxSubmit(function(data){
 					if(data=="suc"){
 						layer.msg('保存成功!', function(){
@@ -92,6 +95,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				});
 			  return false;
 			});
+		  form.on('checkbox(filter)', function(data){
+			  if(data.elem.checked){
+				  role.push(data.elem.name);
+			  }else{
+				  role.splice(role.indexOf(data.elem.name),1);
+			  }
+			});   
 		  form.verify({
 			  userName: function(value, item){ //value：表单的值、item：表单的DOM对象
 			    if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){

@@ -36,8 +36,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="layui-form-item">
 			<label class="layui-form-label">介绍</label>
 			<div class="layui-input-block">
-				<textarea rows="5" cols="30" value="<%=video.getIntroduce() %>" name="introduce" placeholder="请输入" lay-verify="required"
-					autocomplete="off"></textarea>
+				<textarea rows="5" cols="30" name="introduce" placeholder="请输入" lay-verify="required"
+					autocomplete="off"><%=video.getIntroduce() %></textarea>
 			</div>
 		</div>
 		<button type="button" class="layui-btn" id="upload">

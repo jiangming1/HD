@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import shan.HDHealthManagement.po.IntegralRecord;
 import shan.HDHealthManagement.po.WeixinUser;
 import shan.HDHealthManagement.service.WeixinUserService;
 
@@ -33,6 +34,22 @@ public class WeixinUserAction {
 			JSONObject object = new JSONObject();
 			object.put("data", json);
 			object.put("count", count);
+			object.put("code", 0);
+			object.put("msg", "");
+			out.write(object.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value="/record.do")
+	public void getAllByPage(@RequestParam("weixinId") Long weixinId,HttpServletResponse response){
+		try {
+			PrintWriter out = response.getWriter();
+			List<IntegralRecord> list= weixinUserService.record(weixinId);
+			JSONArray json = JSONArray.fromObject(list);
+			JSONObject object = new JSONObject();
+			object.put("data", json);
 			object.put("code", 0);
 			object.put("msg", "");
 			out.write(object.toString());

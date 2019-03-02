@@ -20,6 +20,12 @@ public interface ExpertService {
 	public List<Expert> getByPage(Integer page,Integer rows);
 	
 	/**
+	 * 查询前4个
+	 * @return
+	 */
+	public List<Expert> getAhead();
+	
+	/**
 	 * 添加专家
 	 */
 	public void add(Expert expert);

@@ -23,6 +23,10 @@ public class ExpertServiceImpl implements ExpertService {
 		Integer index = (page-1)*rows;
 		return expertDao.getByPage(index, rows);
 	}
+	
+	public List<Expert> getAhead(){
+		return expertDao.getAhead();
+	}
 
 	public void add(Expert expert) {
 		expertDao.add(expert);

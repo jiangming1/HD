@@ -11,13 +11,25 @@
         select * from cases  LIMIT #{index},#{rows}
     </select>
     
+    <select id="getAhead" resultType="shan.HDHealthManagement.po.Cases">
+        select * from cases  LIMIT 4
+    </select>
+    
+    <select id="getAllByName" resultType="shan.HDHealthManagement.po.Cases">
+        select * from cases where caseName like #{name}
+    </select>
+    
+    <select id="getPageByName" resultType="shan.HDHealthManagement.po.Cases">
+        select * from cases where caseName like #{name} LIMIT #{index},#{rows}
+    </select>
+    
     <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="shan.HDHealthManagement.po.Cases">
         insert into cases(id,caseName,name,age,doctor,hospital,introduce,fileUrl)
         values(#{id},#{caseName},#{name},#{age},#{doctor},#{hospital},#{introduce},#{fileUrl})
     </insert>
     
     <select id="findById" resultType="shan.HDHealthManagement.po.Cases">
-        select * from case where id = #{id}
+        select * from cases where id = #{id}
     </select>
     
     <update id="edit" parameterType="shan.HDHealthManagement.po.Cases">

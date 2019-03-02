@@ -23,7 +23,6 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -182,7 +181,7 @@ public class UserAction {
 		List<UserRole> list = userService.findRoleById(id);
 		List<Long> list2 = new ArrayList<Long>();
 		for (UserRole userRole : list) {
-			list2.add(userRole.getId());
+			list2.add(userRole.getRoleId());
 		}
 		request.setAttribute("user", user);
 		request.setAttribute("role", list2);

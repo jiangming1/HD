@@ -2,6 +2,7 @@ package shan.HDHealthManagement.service;
 
 import java.util.List;
 
+import shan.HDHealthManagement.po.IntegralRecord;
 import shan.HDHealthManagement.po.WeixinUser;
 
 public interface WeixinUserService {
@@ -18,4 +19,11 @@ public interface WeixinUserService {
 	 * @return
 	 */
 	public List<WeixinUser> getByPage(Integer page,Integer rows);
+	
+	/**
+	 * 查询积分记录
+	 * @param weixinId
+	 * @return
+	 */
+	public List<IntegralRecord> record(Long weixinId);
 }

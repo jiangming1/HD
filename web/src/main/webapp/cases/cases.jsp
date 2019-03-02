@@ -9,29 +9,26 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
+<base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>信息管理系统</title>
+<title>案例管理</title>
 <script type="text/javascript"
-	src="<%=basePath%>/scripts/jquery/jquery-1.7.1.js"></script>
- <link rel="stylesheet" href="<%=basePath %>/layui/css/layui.css" media="all">
- <script src="<%=basePath %>/layui/layui.all.js"></script>
+	src="scripts/jquery/jquery-1.7.1.js"></script>
+ <link rel="stylesheet" href="layui/css/layui.css" media="all">
+ <script src="layui/layui.all.js"></script>
 </head>
 <body>
-	<table class="layui-hide" id="dg" lay-filter="dgtool"></table>
-	<script type="text/html" id="bar1">
-	<div class="layui-btn-group">
-	<button onclick="add()" class="layui-btn">增加</button>
-	<button onclick="dels()" class="layui-btn">删除</button>
+	<div  class="layui-form-item">
+		<button onclick="add()" class="layui-btn">增加</button>
+		<button onclick="dels()" class="layui-btn">删除</button>
+		<button onclick="select()" class="layui-btn" style="margin-left:190px;">搜索</button>
+		<input id="select" type="text" placeholder="搜索" class="layui-input" style="width:160px;margin-top: -37px;margin-left:160px;">
 	</div>
-</script>
+	<table class="layui-hide" id="dg" lay-filter="dgtool"></table>
 <script type="text/html" id="bar2">
 	<div class="layui-btn-group">
-		<button lay-event="edit" class="layui-btn layui-btn-sm">
-		<i class="layui-icon">&#xe642;</i>
-		</button>
-		<button lay-event="del" class="layui-btn layui-btn-sm">
-		<i class="layui-icon">&#xe640;</i>
-		</button>
+		<button lay-event="edit" class="layui-btn layui-btn-sm">修改</button>
+		<button lay-event="del" class="layui-btn layui-btn-sm">删除</button>
 	</div>
 </script>
 	<script type="text/javascript">
@@ -41,19 +38,31 @@
 			  type: 2,
 			  title:"添加案例",
 			  moveOut:true,
-			  area: ['350px', '550px'],
+			  area: ['350px', '450px'],
 			  offset: '100px',
-			  content: '<%=basePath %>/cases/add.jsp'
+			  content: 'cases/add.jsp',
+			  end:function(){
+				  table.reload('dg');
+			  }
 			});
+	}
+	function select(){
+		var name = $("#select").val();
+		table.reload("dg",{
+			where: { name:name},
+			url : "cases/getAllByName.do",});
 	}
 	function edit(id){
 		layer.open({
 			  type: 2,
-			  title:"修改Benner",
+			  title:"修改案例",
 			  moveOut:true,
-			  area: ['350px', '550px'],
+			  area: ['350px', '450px'],
 			  offset: '100px',
-			  content: '<%=basePath %>/cases/editJsp.do?id='+id
+			  content: 'cases/editJsp.do?id='+id,
+			  end:function(){
+				  table.reload('dg');
+			  }
 			});
 	}
 	function dels(){
@@ -66,13 +75,13 @@
 		for(var i=0;i<checkStatus.data.length;i++){
 			ids=ids+checkStatus.data[i].id+",";
 		}
-		$.post("<%=basePath%>/cases/dels.do",{ids:ids},function(data){
+		$.post("cases/dels.do",{ids:ids},function(data){
 			if(data=="suc"){
 				layer.msg("删除成功!",function(){
 					table.reload('dg');
 				});
 			}else{
-				layer.alert("删除失败!");
+				layer.msg("删除失败!");
 			}
 		});
 	}
@@ -80,10 +89,9 @@
 			table = layui.table;
 			table.render({
 				elem : '#dg',
-				even: true,
+				defaultToolbar:[],
 				cellMinWidth: 100,
-				toolbar:"#bar1",
-				url : '<%=basePath%>/cases/getAllByPage.do',
+				url : 'cases/getAllByPage.do',
 				method:"post",
 				page : true,
 				cols : [[{
@@ -118,7 +126,7 @@
 					  edit(id);
 				  } else if(layEvent === 'del'){
 					  layer.confirm('真的删除行么', function(index){
-						  $.post("<%=basePath%>/cases/del.do",{id:id},function(data){
+						  $.post("cases/del.do",{id:id},function(data){
 							  if(data=="suc"){
 								  obj.del();
 								  layer.close(index);

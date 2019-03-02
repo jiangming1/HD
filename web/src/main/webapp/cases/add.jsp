@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>My JSP 'add.jsp' starting page</title>
+<title>添加案例</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="<%=basePath %>/layui/layui.js"></script>
 </head>
 <body>
-	<form id="form" method="post" action="<%=basePath %>/cases/add.do" class="layui-form layui-form-pane">
+	<form id="form" method="post" action="cases/add.do" class="layui-form layui-form-pane">
 		<div class="layui-form-item">
 			<label class="layui-form-label">案例</label>
 			<div class="layui-input-block">
@@ -39,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="layui-form-item">
 			<label class="layui-form-label">年龄</label>
 			<div class="layui-input-block">
-				<input type="text" name="age" placeholder="请输入" lay-verify="required"
+				<input type="text" name="age" placeholder="请输入" lay-verify="required|number"
 					autocomplete="off" class="layui-input">
 			</div>
 		</div>
@@ -64,13 +64,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					autocomplete="off"></textarea>
 			</div>
 		</div>
-		<button type="button" class="layui-btn" id="upload">
-			<i class="layui-icon">&#xe67c;</i>上传图片
-		</button>
+		
 		
 		<input type="text" id="fileUrl" name="fileUrl" style="display:none;">
-		<div class="layui-form-item">
+		<div class="layui-form-item" style="margin-left:10px;">
 			<img height="100" width="100" id="file" src="">
+			<button type="button" class="layui-btn" id="upload">
+			<i class="layui-icon">&#xe67c;</i>上传图片
+		</button>
 		</div>
 		<div class="layui-form-item">
 			<div class="layui-input-block">
@@ -84,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  var form = layui.form;
 		  form.on('submit(userform)', function(data){
 			  $("#form").ajaxSubmit(function(data){
-					if(data=="<pre>suc</pre>"){
+					if(data=="suc"){
 						layer.alert('保存成功!', function(){
 							var index = parent.layer.getFrameIndex(window.name);
 							parent.layer.close(index);

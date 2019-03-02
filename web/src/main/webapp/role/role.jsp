@@ -9,8 +9,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
+<base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>信息管理系统</title>
+<title>角色管理</title>
 <script type="text/javascript"
 	src="<%=basePath%>/scripts/jquery/jquery-1.7.1.js"></script>
  <link rel="stylesheet" href="<%=basePath %>/layui/css/layui.css" media="all">
@@ -26,12 +27,9 @@
 </script>
 <script type="text/html" id="bar2">
 	<div class="layui-btn-group">
-		<button lay-event="edit" class="layui-btn layui-btn-sm">
-		<i class="layui-icon">&#xe642;</i>
-		</button>
-		<button lay-event="del" class="layui-btn layui-btn-sm">
-		<i class="layui-icon">&#xe640;</i>
-		</button>
+		<button lay-event="edit" class="layui-btn layui-btn-sm">修改</button>
+		<button lay-event="del" class="layui-btn layui-btn-sm">删除</button>
+		<button lay-event="jurisdiction" class="layui-btn layui-btn-sm">设置权限</button>
 	</div>
 </script>
 	<script type="text/javascript">
@@ -43,7 +41,20 @@
 			  moveOut:true,
 			  area: ['350px', '250px'],
 			  offset: '100px',
-			  content: '<%=basePath %>/role/addJsp.do'
+			  content: 'role/add.jsp',
+			  end:function(){
+				  table.reload('dg');
+			  }
+			});
+	}
+	function jurisdiction(id){
+		layer.open({
+			  type: 2,
+			  title:"设置权限",
+			  moveOut:true,
+			  area: ['350px', '350px'],
+			  offset: '100px',
+			  content: 'role/jurisdiction.jsp?id='+id,
 			});
 	}
 	function edit(id){
@@ -53,7 +64,10 @@
 			  moveOut:true,
 			  area: ['350px', '250px'],
 			  offset: '100px',
-			  content: '<%=basePath %>/role/editJsp.do?id='+id
+			  content: 'role/editJsp.do?id='+id,
+			  end:function(){
+				  table.reload('dg');
+			  }
 			});
 	}
 	function dels(){
@@ -80,7 +94,7 @@
 			table = layui.table;
 			table.render({
 				elem : '#dg',
-				even: true,
+				defaultToolbar:[],
 				cellMinWidth: 100,
 				toolbar:"#bar1",
 				url : '<%=basePath%>/role/getAllByPage.do',
@@ -94,8 +108,8 @@
 					field : 'name',
 					title : '用户名',
 				}, {
-					field : 'url',
-					title : '路径',
+					field : 'memo',
+					title : '描述',
 				}, {
 					field : '_operate',
 					title : '操作',
@@ -107,6 +121,8 @@
 				 var layEvent = obj.event;
 				  if(layEvent === 'edit'){
 					  edit(id);
+				  } else if(layEvent === 'jurisdiction'){
+					  jurisdiction(id);
 				  } else if(layEvent === 'del'){
 					  layer.confirm('真的删除行么', function(index){
 						  $.post("<%=basePath%>/role/del.do",{id:id},function(data){

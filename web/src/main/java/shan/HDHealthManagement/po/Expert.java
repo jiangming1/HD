@@ -15,7 +15,7 @@ public class Expert {
 	private String specialize;
 	private String introduction;
 	private Long region;
-	private String file;
+	private String fileUrl;
 	public Long getId() {
 		return id;
 	}
@@ -65,22 +65,17 @@ public class Expert {
 	public void setRegion(Long region) {
 		this.region = region;
 	}
-	public String getFile() {
-		return file;
-	}
-	public void setFile(String file) {
-		this.file = file;
-	}
-	/**
-	 * @return hospital
-	 */
+
 	public String getHospital() {
 		return hospital;
 	}
-	/**
-	 * @param hospital 要设置的 hospital
-	 */
 	public void setHospital(String hospital) {
 		this.hospital = hospital;
+	}
+	public String getFileUrl() {
+		return fileUrl;
+	}
+	public void setFileUrl(String fileUrl) {
+		this.fileUrl = fileUrl;
 	}
 }

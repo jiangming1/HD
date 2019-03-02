@@ -9,12 +9,13 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
+<base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>信息管理系统</title>
 <script type="text/javascript"
-	src="<%=basePath%>/scripts/jquery/jquery-1.7.1.js"></script>
- <link rel="stylesheet" href="<%=basePath %>/layui/css/layui.css" media="all">
- <script src="<%=basePath %>/layui/layui.all.js"></script>
+	src="scripts/jquery/jquery-1.7.1.js"></script>
+ <link rel="stylesheet" href="layui/css/layui.css" media="all">
+ <script src="layui/layui.all.js"></script>
 </head>
 <body>
 	<table class="layui-hide" id="dg" lay-filter="dgtool"></table>
@@ -40,16 +41,26 @@
 		layer.open({
 			  type: 2,
 			  title:"添加用户",
+			  offset: '100px',
+			  moveOut:true,
 			  area: ['400px', '450px'],
-			  content: '<%=basePath %>/user/addjsp.do'
+			  content: 'user/addjsp.do',
+			  end:function(){
+				  table.reload('dg');
+			  }
 			});
 	}
 	function edit(id){
 		layer.open({
 			  type: 2,
 			  title:"修改用户",
+			  offset: '100px',
+			  moveOut:true,
 			  area: ['400px', '450px'],
-			  content: '<%=basePath %>/user/editjsp.do?id='+id
+			  content: 'user/editjsp.do?id='+id,
+			  end:function(){
+				  table.reload('dg');
+			  }
 			});
 	}
 	function dels(){
@@ -62,13 +73,13 @@
 		for(var i=0;i<checkStatus.data.length;i++){
 			ids=ids+checkStatus.data[i].id+",";
 		}
-		$.post("<%=basePath%>/user/dels.do",{ids:ids},function(data){
+		$.post("user/dels.do",{ids:ids},function(data){
 			if(data=="suc"){
 				layer.msg("删除成功!",function(){
 					table.reload('dg');
 				});
 			}else{
-				layer.alert("删除失败!");
+				layer.msg("删除失败!");
 			}
 		});
 	}
@@ -76,10 +87,10 @@
 			table = layui.table;
 			table.render({
 				elem : '#dg',
-				even: true,
+				defaultToolbar:[],
 				cellMinWidth: 100,
 				toolbar:"#bar1",
-				url : '<%=basePath%>/user/getAllByPage.do',
+				url : 'user/getAllByPage.do',
 				method:"post",
 				page : true,
 				cols : [[{
@@ -111,7 +122,7 @@
 					  edit(id);
 				  } else if(layEvent === 'del'){
 					  layer.confirm('真的删除行么', function(index){
-						  $.post("<%=basePath%>/user/del.do",{id:id},function(data){
+						  $.post("user/del.do",{id:id},function(data){
 							  if(data=="suc"){
 								  obj.del();
 								  layer.close(index);

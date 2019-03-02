@@ -24,6 +24,21 @@ public class CasesServiceImpl implements CasesService {
 		return casesDao.getByPage(index, rows);
 	}
 
+	public List<Cases> getAhead(){
+		return casesDao.getAhead();
+	}
+	
+	public List<Cases> getAllByName(String name) {
+		name = "%"+name+"%";
+		return casesDao.getAllByName(name);
+	}
+
+	public List<Cases> getPageByName(String name, Integer page, Integer rows) {
+		Integer index = (page-1)*rows;
+		name = "%"+name+"%";
+		return casesDao.getPageByName(name, index, rows);
+	}
+
 	public void add(Cases cases) {
 		casesDao.add(cases);
 	}

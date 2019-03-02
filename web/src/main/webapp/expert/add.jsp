@@ -8,20 +8,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>My JSP 'add.jsp' starting page</title>
+<title>添加专家</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <script type="text/javascript"
-	src="<%=basePath%>/scripts/jquery/jquery-1.7.1.js"></script>
+	src="scripts/jquery/jquery-1.7.1.js"></script>
 	<script type="text/javascript"
-	src="<%=basePath%>/scripts/Myjquery.form.js"></script>
-<link rel="stylesheet" href="<%=basePath %>/layui/css/layui.css"
+	src="scripts/Myjquery.form.js"></script>
+<link rel="stylesheet" href="layui/css/layui.css"
 	media="all">
-<script src="<%=basePath %>/layui/layui.js"></script>
+<script src="layui/layui.js"></script>
 </head>
 <body>
-	<form id="form" method="post" action="<%=basePath %>/expert/add.do" enctype="multipart/form-data" class="layui-form layui-form-pane">
+	<form id="form" method="post" action="expert/add.do" class="layui-form layui-form-pane">
 		<div class="layui-form-item">
 			<label class="layui-form-label">所属医院</label>
 			<div class="layui-input-block">
@@ -71,17 +71,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					autocomplete="off" class="layui-input">
 			</div>
 		</div>
-		<div class="layui-form-item">
-			<label class="layui-form-label">图片</label>
-			<div class="layui-input-block">
-				<input type="file" name="fileUrl" lay-verify="required"
-					autocomplete="off" class="layui-input">
-			</div>
+		<input type="text" id="fileUrl" name="fileUrl" style="display:none;">
+		<div class="layui-form-item" style="margin-left:10px;">
+			<img height="100" width="100" id="file" src="">
+			<button type="button" class="layui-btn" id="upload">
+			<i class="layui-icon">&#xe67c;</i>上传图片
+		</button>
 		</div>
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<button class="layui-btn" lay-submit lay-filter="userform">立即提交</button>
-				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 			</div>
 		</div>
 	</form>
@@ -90,7 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  var form = layui.form;
 		  form.on('submit(userform)', function(data){
 			  $("#form").ajaxSubmit(function(data){
-					if(data=="<pre>suc</pre>"){
+					if(data=="suc"){
 						layer.alert('保存成功!', function(){
 							var index = parent.layer.getFrameIndex(window.name);
 							parent.layer.close(index);
@@ -100,6 +99,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					}
 				});
 			  return false;
+			});
+		});
+		layui.use('upload', function() {
+			var upload = layui.upload;
+			upload.render({
+				elem : '#upload',
+				accept:'image',
+				acceptMime: 'image/jpg, image/png',
+				url : 'expert/upload.do',
+				done : function(res) {
+					$("#fileUrl").val(res.data);
+					$("#file").attr("src",res.data);
+				},
+				error : function() {
+					alert("文件上传失败");
+				}
 			});
 		});
 		    

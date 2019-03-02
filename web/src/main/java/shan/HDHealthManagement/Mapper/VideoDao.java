@@ -36,6 +36,12 @@ public interface VideoDao {
 	public List<Video> getPageByName(@Param("name")String name,@Param("index")Integer index,@Param("rows")Integer rows);
 	
 	/**
+	 * 查询前4个
+	 * @return
+	 */
+	public List<Video> getAhead();
+	
+	/**
 	 * 添加视频
 	 */
 	public void add(Video video);

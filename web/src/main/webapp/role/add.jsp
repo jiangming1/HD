@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -8,7 +8,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>My JSP 'add.jsp' starting page</title>
+<title>添加角色</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -16,14 +17,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	src="<%=basePath%>/scripts/jquery/jquery-1.7.1.js"></script>
 	<script type="text/javascript"
 	src="<%=basePath%>/scripts/Myjquery.form.js"></script>
-
 <script src="<%=basePath %>/layui/layui.js"></script>
-<script src="<%=basePath %>/layui/lay/modules/layui-xtree.js"></script>
 <link rel="stylesheet" href="<%=basePath %>/layui/css/layui.css"
 	media="all">
 </head>
 <body>
-	<form id="form" method="post" action="<%=basePath %>/role/add.do" class="layui-form layui-form-pane">
+	<form id="form" method="post" action="role/add.do" class="layui-form layui-form-pane">
 		<div class="layui-form-item">
 			<label class="layui-form-label">名称</label>
 			<div class="layui-input-block">
@@ -39,31 +38,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 		<div class="layui-form-item">
-			<label class="layui-form-label">权限</label>
-			<input id="jurisdiction" type="text" name="jurisdiction" style="display:none;">
-			<div id="xtree"></div>
-		</div>
-		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<button class="layui-btn" lay-submit lay-filter="userform">立即提交</button>
-				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 			</div>
 		</div>
 	</form>
 	<script>
-	function getCheck(tree){
-		var treeChick = [];
-		for(var i =0;i<tree.length;i++){
-			treeChick.push(tree[i].value);
-		}
-		return treeChick;
-	}
-	
 		layui.use('form', function(){
 		  var form = layui.form;
 		  form.on('submit(userform)', function(data){
-			  var treeChick = getCheck(xtree.GetChecked());
-			  $("#jurisdiction").val(treeChick);
 			  $("#form").ajaxSubmit(function(data){
 					if(data=="suc"){
 						layer.alert('保存成功!', function(){
@@ -75,12 +58,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					}
 				});
 			  return false;
-			});
-			var xtree = new layuiXtree({
-				elem: 'xtree',
-		        form: form,
-				data: <%=request.getAttribute("data")%>,
-				isopen : false
 			});
 		});
 	</script>

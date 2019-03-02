@@ -9,24 +9,22 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
+<base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>小百科</title>
 <script type="text/javascript"
-	src="<%=basePath%>/scripts/jquery/jquery-1.7.1.js"></script>
- <link rel="stylesheet" href="<%=basePath %>/layui/css/layui.css" media="all">
- <script src="<%=basePath %>/layui/layui.all.js"></script>
+	src="scripts/jquery/jquery-1.7.1.js"></script>
+ <link rel="stylesheet" href="layui/css/layui.css" media="all">
+ <script src="layui/layui.all.js"></script>
 </head>
 <body>
-
-	<table class="layui-hide" id="dg" lay-filter="dgtool"></table>
-	<script type="text/html" id="bar1">
 	<div  class="layui-form-item">
 		<button onclick="add()" class="layui-btn">增加</button>
 		<button onclick="dels()" class="layui-btn">删除</button>
 		<button onclick="select()" class="layui-btn" style="margin-left:190px;">搜索</button>
 		<input id="select" type="text" placeholder="搜索" class="layui-input" style="width:160px;margin-top: -37px;margin-left:160px;">
 	</div>
-</script>
+	<table class="layui-hide" id="dg" lay-filter="dgtool"></table>
 <script type="text/html" id="bar2">
 	<div class="layui-btn-group">
 		<button lay-event="edit" class="layui-btn layui-btn-sm">修改</button>
@@ -42,29 +40,17 @@
 			  moveOut:true,
 			  area: ['350px', '450px'],
 			  offset: '100px',
-			  content: '<%=basePath %>/encyclopedias/add.jsp',
+			  content: 'encyclopedias/add.jsp',
 			  end:function(){
-				  table.reload("dg",{
-						elem : '#dg',
-						even: true,
-						cellMinWidth: 100,
-						toolbar:"#bar1",
-						url : '<%=basePath%>/encyclopedias/getAllByPage.do',
-						method:"post",
-						page : true});
+				  table.reload('dg');
 			  }
 			});
 	}
 	function select(){
 		var name = $("#select").val();
 		table.reload("dg",{
-			elem : '#dg',
-			cellMinWidth: 100,
-			toolbar:"#bar1",
 			where: { name:name},
-			url : "<%=basePath%>/encyclopedias/getAllByName.do",
-			method:"post",
-			page : true});
+			url : "encyclopedias/getAllByName.do"});
 	}
 	function edit(id){
 		layer.open({
@@ -73,16 +59,9 @@
 			  moveOut:true,
 			  area: ['350px', '450px'],
 			  offset: '100px',
-			  content: '<%=basePath %>/encyclopedias/editJsp.do?id='+id,
+			  content: 'encyclopedias/editJsp.do?id='+id,
 			  end:function(){
-				  table.reload("dg",{
-						elem : '#dg',
-						even: true,
-						cellMinWidth: 100,
-						toolbar:"#bar1",
-						url : '<%=basePath%>/encyclopedias/getAllByPage.do',
-						method:"post",
-						page : true});
+				  table.reload('dg');
 			  }
 			});
 	}
@@ -96,7 +75,7 @@
 		for(var i=0;i<checkStatus.data.length;i++){
 			ids=ids+checkStatus.data[i].id+",";
 		}
-		$.post("<%=basePath%>/encyclopedias/dels.do",{ids:ids},function(data){
+		$.post("encyclopedias/dels.do",{ids:ids},function(data){
 			if(data=="suc"){
 				layer.msg("删除成功!",function(){
 					table.reload('dg');
@@ -111,9 +90,9 @@
 			table.render({
 				elem : '#dg',
 				cellMinWidth: 100,
-				url : '<%=basePath%>/encyclopedias/getAllByPage.do',
+				defaultToolbar:[],
+				url : 'encyclopedias/getAllByPage.do',
 				method:"post",
-				toolbar:"#bar1",
 				page : true,
 				cols : [[{
 					field : 'id',
@@ -135,7 +114,7 @@
 					  edit(id);
 				  } else if(layEvent === 'del'){
 					  layer.confirm('真的删除行么', function(index){
-						  $.post("<%=basePath%>/encyclopedias/del.do",{id:id},function(data){
+						  $.post("encyclopedias/del.do",{id:id},function(data){
 							  if(data=="suc"){
 								  obj.del();
 								  layer.close(index);

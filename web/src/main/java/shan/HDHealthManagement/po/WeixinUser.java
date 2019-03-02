@@ -2,23 +2,19 @@ package shan.HDHealthManagement.po;
 
 public class WeixinUser {
 	private Long id;
-	private String nickName;
+	private String nickname;
 	private String name;
 	private String code;
 	private String fileUrl;
-	private Boolean examine;
+	private Integer examine;
+	private Integer integral;
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNickName() {
-		return nickName;
-	}
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
-	}
+
 	public String getName() {
 		return name;
 	}
@@ -37,11 +33,23 @@ public class WeixinUser {
 	public void setFileUrl(String fileUrl) {
 		this.fileUrl = fileUrl;
 	}
-	public Boolean getExamine() {
+	public Integer getExamine() {
 		return examine;
 	}
-	public void setExamine(Boolean examine) {
+	public void setExamine(Integer examine) {
 		this.examine = examine;
+	}
+	public Integer getIntegral() {
+		return integral;
+	}
+	public void setIntegral(Integer integral) {
+		this.integral = integral;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	
 }

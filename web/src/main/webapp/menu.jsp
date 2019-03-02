@@ -29,6 +29,9 @@
 			name : "轮播图管理",
 			"accessPath" : "benner/benner.jsp",
 		}, {
+			name : "专家管理",
+			"accessPath" : "expert/expert.jsp",
+		},{
 			name : "康复视频管理",
 			"accessPath" : "video/video.jsp",
 		} ],
@@ -52,8 +55,11 @@
 	layui.tree({
 		elem : '#tab3',
 		nodes : [{
-			name : "积分管理",
-			"accessPath" : "integral/integral.jsp",
+			name : "微信用户管理",
+			"accessPath" : "weixinUser/weixinUser.jsp",
+		},{
+			name : "文章管理",
+			"accessPath" : "article/article.jsp",
 		}],
 		click : function(node) {
 			 $('#rightMain').attr('src',node.accessPath);
