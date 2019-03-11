@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+  http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+  http://www.springframework.org/schema/util
+  http://www.springframework.org/schema/util/spring-util-4.2.xsd
+  http://www.springframework.org/schema/context 
+  http://www.springframework.org/schema/context/spring-context-4.2.xsd
+  http://www.springframework.org/schema/mvc
+  http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+
+	<!-- 使用默认的注解映射 -->
+	<mvc:annotation-driven />
+	<!-- 启用spring mvc 注解 -->
+    <context:annotation-config />
+
+	<!-- 自动扫描controller包中的控制器 -->
+	<context:component-scan base-package="shan.HDHealthManagement.action" />
+	
+	 <!-- 对转向页面的路径解析。prefix：前缀， suffix：后缀 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/" p:suffix=".jsp" />
+
+</beans>
