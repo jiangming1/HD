@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="shan.HDHealthManagement.Mapper.DistributionDao">
+    
+    <select id="getAll" resultType="shan.HDHealthManagement.po.Distribution">
+        select * from distribution
+    </select>
+    
+    <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="shan.HDHealthManagement.po.Distribution">
+        insert into distribution(id,distribution,num,memo,flag)
+        values(#{id},#{distribution},#{num},#{memo},#{flag})
+    </insert>
+    
+    <select id="findByRegional" resultType="shan.HDHealthManagement.po.Distribution">
+        select * from article where flag = 1
+    </select>
+    
+    <select id="findByAge" resultType="shan.HDHealthManagement.po.Distribution">
+        select * from article where flag = 2
+    </select>
+ 
+    <delete id="del">
+        delete from article
+    </delete>
+    
+</mapper>

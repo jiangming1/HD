@@ -48,7 +48,13 @@
 		{
 			name : "康复视频管理",
 			"accessPath" : "video/video.jsp",
-		}
+		},
+		</shiro:hasPermission>
+		<shiro:hasPermission name="distribution">
+		{
+			name : "现状分布管理",
+			"accessPath" : "distribution/distribution.jsp",
+		},
 		</shiro:hasPermission>
 		],
 		click : function(node) {

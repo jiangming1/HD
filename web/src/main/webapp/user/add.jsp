@@ -8,20 +8,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <base href="<%=basePath%>">
-<title>My JSP 'add.jsp' starting page</title>
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="cache-control" content="no-cache">
-<meta http-equiv="expires" content="0">
+<title>添加用户</title>
 <script type="text/javascript"
-	src="<%=basePath%>/scripts/jquery/jquery-1.7.1.js"></script>
+	src="scripts/jquery/jquery-1.7.1.js"></script>
 	<script type="text/javascript"
-	src="<%=basePath%>/scripts/Myjquery.form.js"></script>
-<link rel="stylesheet" href="<%=basePath %>/layui/css/layui.css"
+	src="scripts/Myjquery.form.js"></script>
+<link rel="stylesheet" href="layui/css/layui.css"
 	media="all">
-<script src="<%=basePath %>/layui/layui.js"></script>
+<script src="layui/layui.js"></script>
 </head>
 <body>
-	<form id="form" method="post" action="<%=basePath %>/user/add.do" class="layui-form layui-form-pane">
+	<form id="form" method="post" action="user/add.do" class="layui-form layui-form-pane">
 		<div class="layui-form-item">
 			<label class="layui-form-label">账号</label>
 			<div class="layui-input-block">
@@ -103,7 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  }
 			});   
 		  form.verify({
-			  userName: function(value, item){ //value：表单的值、item：表单的DOM对象
+			  userName: function(value, item){
 			    if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
 			      return '用户名不能有特殊字符';
 			    }

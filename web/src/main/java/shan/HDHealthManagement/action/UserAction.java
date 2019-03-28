@@ -80,12 +80,15 @@ public class UserAction {
 				} catch (IncorrectCredentialsException ice) {
 					// 捕获密码错误异常
 					out.write("1");
+					return;
 				} catch (UnknownAccountException uae) {
 					// 捕获未知用户名异常
 					out.write("1");
+					return;
 				} catch (ExcessiveAttemptsException eae) {
 					// 捕获错误登录过多的异常
 					out.write("2");
+					return;
 				}
 				User user = userService.findByUsername(userName);
 				subject.getSession().setAttribute("user", user);

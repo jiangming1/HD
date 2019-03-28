@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <groupId>shan</groupId>
-  <artifactId>web</artifactId>
-  <version>0.0.1</version>
-  <packaging>war</packaging>
+	<groupId>shan</groupId>
+	<artifactId>web</artifactId>
+	<version>0.0.1</version>
+	<packaging>war</packaging>
 
-  <dependencies>
+	<dependencies>
 		<!-- Servlet API -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -125,6 +125,8 @@
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-all</artifactId>
 			<version>1.2.3</version>
+			<classifier>sources</classifier>
+			<type>java-source</type>
 		</dependency>
 		<!-- shiro -->
 		<!-- shiro核心包 -->
@@ -132,12 +134,17 @@
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-core</artifactId>
 			<version>1.2.3</version>
+			<classifier>sources</classifier>
+			<type>java-source</type>
 		</dependency>
+
 		<!-- 添加shiro web支持 -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-web</artifactId>
 			<version>1.2.3</version>
+			<classifier>sources</classifier>
+			<type>java-source</type>
 		</dependency>
 		<!-- 添加shiro spring整合 -->
 		<dependency>
@@ -206,8 +213,46 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.3</version>
 		</dependency>
-
-
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.11</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.11</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.6</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+			<version>1.7.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.7.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+			<version>1.7.6</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -230,5 +275,5 @@
 		</plugins>
 	</build>
 
- 
+
 </project>

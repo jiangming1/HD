@@ -3,7 +3,6 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
@@ -12,13 +11,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">
-	<script type="text/javascript" src="<%=basePath%>/scripts/jquery/jquery-1.7.1.js"></script>
-	<script type="text/javascript" src="<%=basePath%>/scripts/Myjquery.form.js"></script>
-	<link rel="stylesheet" href="<%=basePath %>/layui/css/layui.css" media="all">
-	<script src="<%=basePath %>/layui/layui.js"></script>
+	<script type="text/javascript" src="scripts/jquery/jquery-1.7.1.js"></script>
+	<script type="text/javascript" src="scripts/Myjquery.form.js"></script>
+	<link rel="stylesheet" href="layui/css/layui.css" media="all">
+	<script src="layui/layui.js"></script>
 	</head>
 <body>
-	<form id="form" method="post" action="<%=basePath %>/benner/add.do"  class="layui-form layui-form-pane">
+	<form id="form" method="post" action="benner/add.do"  class="layui-form layui-form-pane">
 		<div class="layui-form-item">
 			<label class="layui-form-label">名称</label>
 			<div class="layui-input-block">
@@ -45,7 +44,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<button class="layui-btn" lay-submit lay-filter="userform">立即提交</button>
-				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 			</div>
 		</div>
 	</form>
@@ -72,7 +70,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				elem : '#upload',
 				accept:'image',
 				acceptMime: 'image/jpg, image/png',
-				url : '<%=basePath %>/benner/upload.do',
+				url : 'benner/upload.do',
 				done : function(res) {
 					$("#fileUrl").val(res.data);
 					$("#file").attr("src",res.data);

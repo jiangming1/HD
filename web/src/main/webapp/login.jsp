@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				}else if(data=="1"){
 					alert("用户名密码错误");
 				}else if(data=="2"){
-					alert("");
+					alert("登陆次数超出");
 				}else if(data=="3"){
 					window.location.href = "index.jsp";
 				}
