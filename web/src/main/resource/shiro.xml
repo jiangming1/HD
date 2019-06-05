@@ -10,34 +10,25 @@
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
 	
-	<!--ehcache -->
-	<!-- <bean id="ehcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
-		<property name="cacheManagerConfigFile" value="classpath:ehcache.xml" />
-	</bean>
-	<bean id="credentialsMatcher"
-		class="shan.HDHealthManagement.util.RetryLimitCredentialsMatcher">
-		<constructor-arg ref="ehcacheManager" />
-		<property name="hashAlgorithmName" value="md5" />
-		<property name="hashIterations" value="2" />
-		<property name="storedCredentialsHexEncoded" value="true" />
-	</bean> -->
+	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager" >
+	<property name="cacheManagerConfigFile" value="classpath:ehcache.xml"/>
+	</bean>  
 
 	<!-- Realm实现 -->
 	<bean id="userRealm" class="shan.HDHealthManagement.util.UserRealm">
-		<!-- <property name="credentialsMatcher" ref="credentialsMatcher"/>
-        <property name="cachingEnabled" value="false"/> -->
 	</bean>
 
 	<!-- 安全管理器 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="userRealm" />
-		<!-- <property name="cacheManager" ref="cacheManager" /> -->
+		<property name="cacheManager" ref="cacheManager" />
 	</bean>
 
 
 	<!-- Shiro的Web过滤器 -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
+		<!-- <property name="successUrl" value="/login/loginSuccessFull" />   -->
 		<property name="loginUrl" value="/login.jsp" />
 		<property name="unauthorizedUrl" value="/login.jsp" />
 		<property name="filterChainDefinitions">
@@ -69,6 +60,4 @@
 			</value>
 		</property>
 	</bean>
-
-	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 </beans>
