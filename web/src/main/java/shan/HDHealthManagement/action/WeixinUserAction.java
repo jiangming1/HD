@@ -19,6 +19,7 @@ import shan.HDHealthManagement.po.Clock;
 import shan.HDHealthManagement.po.IntegralRecord;
 import shan.HDHealthManagement.po.WeixinUser;
 import shan.HDHealthManagement.service.WeixinUserService;
+import shan.HDHealthManagement.util.HttpUtil;
 
 @Controller
 @RequestMapping(value = "/weixinUser")
@@ -182,6 +183,11 @@ public class WeixinUserAction {
 	
 	@RequestMapping(value="/login.do")
 	public void login(@RequestParam("code")String code,HttpServletResponse response){
-		
+		String result = HttpUtil.getHttp(code);
+		JSONObject object = new JSONObject(result);
+		String errcode = object.getString("errcode");
+		if(errcode!=null&&"0".equals(errcode)) {
+			String openid = object.getString("openid");
+		}
 	}
 }
