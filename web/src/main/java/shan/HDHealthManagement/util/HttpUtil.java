@@ -10,7 +10,7 @@ import java.net.URL;
 public class HttpUtil {
 	public static String getHttp(String code) {
         try {
-        	String path = "https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code="+code+"&grant_type=authorization_code";
+        	String path = "https://api.weixin.qq.com/sns/jscode2session?appid=wx84a0089113ddf66c&secret=ebcbb3ae419ef538292ff13f28c75f78&js_code="+code+"&grant_type=authorization_code";
             URL url = new URL(path);
             //打开和url之间的连接
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
