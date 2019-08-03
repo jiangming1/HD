@@ -2,6 +2,11 @@ package shan.HDHealthManagement.po;
 
 import java.util.Date;
 
+/**
+ * 打卡记录
+ * @author 18732
+ *
+ */
 public class Clock {
 	private Long id;
 	private Long weixinId;

@@ -15,14 +15,18 @@
         select * from weixinUser where id = #{id}
     </select>
     
+    <select id="findByOpenId" resultType="shan.HDHealthManagement.po.WeixinUser">
+        select * from weixinUser where openid = #{openId}
+    </select>
+    
     <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="shan.HDHealthManagement.po.WeixinUser">
-        insert into weixinUser(id,nickname,openid,examine)
-        values(#{id},#{nickname},#{openid},#{examine})
+        insert into weixinUser(id,openid,sessionKey,unionid,integral)
+        values(#{id},#{openid},#{sessionKey},#{unionid},#{integral})
     </insert>
     
      <select id="edit" parameterType="shan.HDHealthManagement.po.WeixinUser">
         update weixinUser set name=#{name},nickname=#{nickname},code=#{code},fileUrl=#{fileUrl},examine=#{examine},
-        integral=#{integral},week=#{week},mouth=#{mouth},year=#{year},clock=#{clock}
+        integral=#{integral},week=#{week},mouth=#{mouth},year=#{year},clock=#{clock},sessionKey=#{sessionKey},unionid=#{unionid}
         where id=#{id}
     </select>
     
@@ -57,5 +61,10 @@
      <insert id="addClock" useGeneratedKeys="true" keyProperty="id" parameterType="shan.HDHealthManagement.po.WeixinUser">
         insert into clock(id,weixinId,motion,housework,date)
         values(#{id},#{weixinId},#{motion},#{housework},#{date})
+    </insert>
+    
+    <insert id="addIntegralRecord" useGeneratedKeys="true" keyProperty="id" parameterType="shan.HDHealthManagement.po.IntegralRecord">
+        insert into clock(id,weixinId,integral,memo,date)
+        values(#{id},#{weixinId},#{integral},#{memo},#{date})
     </insert>
 </mapper>

@@ -2,6 +2,8 @@ package shan.HDHealthManagement.service;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 import shan.HDHealthManagement.po.Clock;
 import shan.HDHealthManagement.po.IntegralRecord;
 import shan.HDHealthManagement.po.WeixinUser;
@@ -27,6 +29,13 @@ public interface WeixinUserService {
 	 * @return
 	 */
 	public WeixinUser findById(Long id);
+	
+	/**
+	 * 根据openid查询
+	 * @param WeixinId
+	 * @return
+	 */
+	public WeixinUser findByOpenId(String openid);
 	
 	/**
 	 * 增加
@@ -86,5 +95,5 @@ public interface WeixinUserService {
 	/**
 	 * 添加打卡记录
 	 */
-	public void addClock(Clock clock);
+	public void addClock(Long weixinId,Integer motion,Integer housework);
 }

@@ -169,12 +169,7 @@ public class WeixinUserAction {
 	public void addClock(@RequestParam("weixinId")Long weixinId,@RequestParam("motion")Integer motion,@RequestParam("housework")Integer housework,HttpServletResponse response){
 		try {
 			PrintWriter out = response.getWriter();
-			Clock clock = new Clock();
-			clock.setWeixinId(weixinId);
-			clock.setMotion(motion);
-			clock.setHousework(housework);
-			clock.setDate(new Date());
-			weixinUserService.addClock(clock);
+			weixinUserService.addClock(weixinId,motion,housework);
 			out.write("suc");
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -183,11 +178,30 @@ public class WeixinUserAction {
 	
 	@RequestMapping(value="/login.do")
 	public void login(@RequestParam("code")String code,HttpServletResponse response){
-		String result = HttpUtil.getHttp(code);
-		JSONObject object = new JSONObject(result);
-		String errcode = object.getString("errcode");
-		if(errcode!=null&&"0".equals(errcode)) {
-			String openid = object.getString("openid");
+		try {
+			PrintWriter out = response.getWriter();
+			String result = HttpUtil.getHttp(code);
+			JSONObject object = new JSONObject(result);
+			String errcode = object.getString("errcode");
+			if (errcode != null && "0".equals(errcode)) {
+				String openid = object.getString("openid");
+				String sessionKey = object.getString("session_key");
+				String unionid = object.getString("unionid");
+				WeixinUser weixinUser = weixinUserService.findByOpenId(openid);
+				if (weixinUser == null) {
+					weixinUser = new WeixinUser();
+					weixinUser.setOpenid(openid);
+					weixinUser.setSessionKey(sessionKey);
+					weixinUser.setUnionid(unionid);
+					weixinUser.setIntegral(0);
+					weixinUserService.add(weixinUser);
+					out.write(weixinUser.getId().toString());
+				}else {
+					out.write(weixinUser.getId().toString());
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }

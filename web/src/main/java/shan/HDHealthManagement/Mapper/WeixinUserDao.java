@@ -40,6 +40,13 @@ public interface WeixinUserDao {
 	public WeixinUser findById(Long id);
 	
 	/**
+	 * 根据openid查询
+	 * @param WeixinId
+	 * @return
+	 */
+	public WeixinUser findByOpenId(String openId);
+	
+	/**
 	 * 增加
 	 * @param weixinUser
 	 */
@@ -91,4 +98,9 @@ public interface WeixinUserDao {
 	 * 添加打卡记录
 	 */
 	public void addClock(Clock clock);
+	
+	/**
+	 * 添加打卡记录
+	 */
+	public void addIntegralRecord(IntegralRecord integralRecord);
 }

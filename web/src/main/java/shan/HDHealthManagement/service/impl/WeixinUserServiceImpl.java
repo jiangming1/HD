@@ -1,5 +1,6 @@
 package shan.HDHealthManagement.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -33,6 +34,11 @@ public class WeixinUserServiceImpl implements WeixinUserService {
 	@Transactional(readOnly = true)
 	public WeixinUser findById(Long id) {
 		return weixinUserDao.findById(id);
+	}
+	
+	@Transactional(readOnly = true)
+	public WeixinUser findByOpenId(String openid) {
+		return weixinUserDao.findByOpenId(openid);
 	}
 	
 	public void add(WeixinUser weixinUser){
@@ -78,9 +84,50 @@ public class WeixinUserServiceImpl implements WeixinUserService {
 		return weixinUserDao.year();
 	}
 
-	public void addClock(Clock clock) {
+	public void addClock(Long weixinId,Integer motion,Integer housework) {
+		Clock clock = new Clock();
+		clock.setWeixinId(weixinId);
+		clock.setMotion(motion);
+		clock.setHousework(housework);
+		clock.setDate(new Date());
 		weixinUserDao.addClock(clock);
 		WeixinUser weixinUser = weixinUserDao.findById(clock.getWeixinId());
+		IntegralRecord record = new IntegralRecord();
+		record.setWeixinId(weixinId);
+		record.setMemo("运动");
+		record.setDate(new Date());
+		if(motion==10) {
+			weixinUser.setIntegral(weixinUser.getIntegral()+4);
+			record.setIntegral(4);
+		}else if(motion==20) {
+			weixinUser.setIntegral(weixinUser.getIntegral()+6);
+			record.setIntegral(6);
+		}else if(motion==30) {
+			weixinUser.setIntegral(weixinUser.getIntegral()+8);
+			record.setIntegral(8);
+		}else if(motion==40) {
+			weixinUser.setIntegral(weixinUser.getIntegral()+10);
+			record.setIntegral(10);
+		}
+		weixinUserDao.addIntegralRecord(record);
+		record = new IntegralRecord();
+		record.setWeixinId(weixinId);
+		record.setMemo("做家务");
+		record.setDate(new Date());
+		if(housework==10) {
+			weixinUser.setIntegral(weixinUser.getIntegral()+4);
+			record.setIntegral(4);
+		}else if(housework==20) {
+			weixinUser.setIntegral(weixinUser.getIntegral()+6);
+			record.setIntegral(6);
+		}else if(housework==30) {
+			weixinUser.setIntegral(weixinUser.getIntegral()+8);
+			record.setIntegral(8);
+		}else if(housework==40) {
+			weixinUser.setIntegral(weixinUser.getIntegral()+10);
+			record.setIntegral(10);
+		}
+		weixinUserDao.addIntegralRecord(record);
 		weixinUser.setClock(weixinUser.getClock()+clock.getMotion()+clock.getHousework());
 		weixinUser.setWeek(weixinUser.getWeek()+clock.getMotion()+clock.getHousework());
 		weixinUser.setMouth(weixinUser.getMouth()+clock.getMotion()+clock.getHousework());

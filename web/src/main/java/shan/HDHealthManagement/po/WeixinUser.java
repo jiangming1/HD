@@ -3,6 +3,8 @@ package shan.HDHealthManagement.po;
 public class WeixinUser {
 	private Long id;
 	private String openid;
+	private String sessionKey;
+	private String unionid;
 	private String nickname;
 	private String name;
 	private String code;
@@ -85,6 +87,18 @@ public class WeixinUser {
 	}
 	public void setOpenid(String openid) {
 		this.openid = openid;
+	}
+	public String getSessionKey() {
+		return sessionKey;
+	}
+	public void setSessionKey(String sessionKey) {
+		this.sessionKey = sessionKey;
+	}
+	public String getUnionid() {
+		return unionid;
+	}
+	public void setUnionid(String unionid) {
+		this.unionid = unionid;
 	}
 	
 }
