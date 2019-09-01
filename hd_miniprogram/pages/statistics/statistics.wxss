@@ -1,0 +1,117 @@
+.container{
+  background-color: #eee;
+}
+.img-banner{
+  width: 100%;
+  height: 200px;
+}
+.info-detail-wrapper{
+  background-color: #fff;
+  margin-top: 5px;
+}
+.info-detail-wrapper > view:nth-child(1){
+  color: #f1844a;
+  padding-left: 10px;
+}
+.info-detail-wrapper > view:nth-child(2){
+  color: #666;
+  font-size: 14px;
+  padding-left: 10px;
+}
+.info-detail-wrapper > view:nth-child(3){
+  display: -webkit-flex;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 110px;
+  padding-left: 10px;
+}
+.info-detail-wrapper > view:nth-child(3) > view:nth-child(1){
+  width: 70%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-all;
+ display:-webkit-box;
+ -webkit-line-clamp:4;
+ -webkit-box-orient:vertical;
+ font-size: 16px;
+ color: #999;
+}
+.info-detail-wrapper > view:nth-child(3) > view:nth-child(2){
+  width: 30%;
+  text-align: center;
+}
+.info-detail-wrapper > view:nth-child(3) > view:nth-child(2) > image{
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+}
+.info-detail-wrapper > view:nth-child(4){
+  padding-left: 10px;
+}
+.info-detail-wrapper > view:nth-child(4) > text{
+  font-size: 15px;
+}
+.info-detail-wrapper > view:nth-child(4) > text:nth-child(2){
+  margin-left: 20px;
+}
+.load-more{
+  position: relative;
+  color: #b656ec;
+  text-align: center;
+  font-size: 15px;
+  margin-top: 5px;
+}
+.load-more::before{
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 90px;
+  height: 1px;
+  background-color: #bbb;
+  content: '';
+}
+.load-more::after{
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 90px;
+  height: 1px;
+  background-color: #bbb;
+  content: '';
+}
+.canvas-container{
+  width: 100%;
+  height: 400px;
+  background-color: #fff;
+}
+.canvas-container-steps{
+  height: 300px;
+}
+.canvas-container-guage{
+  position: relative;
+}
+.canvas-container-guage-view{
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.canvas-container > view:nth-child(1){
+  text-align: center;
+  font-size: 16px;
+  padding: 10px 0;
+}
+ff-canvas {
+  width: 100%;
+  height: 100%;
+}
+.canvas-container-ring{
+  height: 350px;
+}
+video{
+  width: 100%;
+}

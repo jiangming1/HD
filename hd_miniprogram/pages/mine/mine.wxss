@@ -1,0 +1,198 @@
+.container{
+  background-color: #f0f0f0;
+  padding-top: 30rpx;
+}
+.baike{
+  background-color: #fff;
+}
+.baike:not(:nth-child(1)){
+  margin-top: 20px;
+}
+.hd-title{
+  font-size: 20px;
+  font-weight: 500;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  position: relative;
+}
+.item-content{
+  display: -webkit-flex;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 95%;
+  margin: 0 auto;
+}
+.item-flex-1th{
+  width: 80%;
+  display: -webkit-box; 
+  -webkit-box-orient: vertical; 
+  -webkit-line-clamp: 3; 
+  overflow: hidden;
+  font-size: 13px;
+  padding-left: 60rpx;
+  color: #999;
+}
+.item-flex-2th{
+  width: 20%;
+  text-align: center;
+}
+.item-flex-2th > image{
+  width: 120rpx;
+  height: 120rpx;
+}
+.item-header{
+  margin: 10rpx 0;
+  padding-left: 20rpx;
+  font-size: 17px;
+  color: #ff6500;
+}
+.load-more{
+  width: 95%;
+  text-align: center;
+  font-size: 13px;
+  margin: 0 auto;
+  padding: 10px 0;
+  color: #9d83f9;
+  position: relative;
+}
+.load-more::before{
+  display: block;
+  content: '';
+  width: 210rpx;
+  height: 1px;
+  background-color: #bbb;
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  transform: translateY(-50%);
+}
+.load-more::after{
+  display: block;
+  content: '';
+  width: 210rpx;
+  height: 1px;
+  background-color: #bbb;
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+}
+.video-header{
+  color: #666;
+  font-size: 17px;
+  padding-left: 16rpx;
+}
+.video-wrapper{
+  width: 95%;
+  height: 400rpx;
+  margin: 0 auto;
+  padding: 20rpx 0;
+}
+.video-wrapper > video{
+  width: 100%;
+  height: 400rpx;
+  border-radius: 5px;
+}
+.video-container{
+  width: 100%;
+}
+.punch-record{
+  background-color: #fff;
+  margin-top: 20px;
+}
+.punch-record > view{
+  margin: 10rpx 0;
+}
+.punch-record-header{
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+}
+.today-punch,.ranking-list{
+  color: #444;
+  font-size: 15px;
+  padding-left: 16px;
+}
+.ranking-list > text{
+  color: #bd10e0;
+  padding-left: 10px;
+}
+.today-punch > view{
+  color: #444;
+  font-size: 13px;
+  display: inline-block;
+  height: 40rpx;
+}
+.today-punch > view.today-punch-time{
+  margin-left: 20rpx;
+}
+.today-punch > view > icon.checked{
+  background-color: #bd10e0;
+  border-radius: 50%;
+  width: 20rpx;
+  height: 20rpx;
+  margin: 0 5rpx;
+  border: 1px solid #bd10e0;
+}
+.today-punch > view > icon{
+  background-color: #fff;
+  border-radius: 50%;
+  width: 20rpx;
+  height: 20rpx;
+  margin: 0 5rpx;
+  border: 1px solid #666;
+}
+.today-punch-sport{
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 20rpx;
+  background-color: #fff;
+  position: relative;
+  margin-top: -20rpx;
+}
+.today-punch-housework{
+  padding-bottom: 20rpx;
+}
+.today-punch-sport::before{
+  display: block;
+  content: '';
+  height: 1px;
+  width: 95%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #bd10e0;
+}
+.today-punch-sport > view{
+  flex: 1;
+}
+.today-punch-sport > view > text{
+  font-size: 13px;
+}
+.sports-time{
+  background-color: #fff;
+  padding: 20rpx 0 20rpx 40rpx;
+}
+.sports-time > image{
+  height: 60rpx;
+  width: 60rpx;
+  vertical-align: middle;
+  margin-left: 16rpx;
+}
+.sports-time > text:nth-child(2){
+  vertical-align: middle;
+  font-size: 16px;
+  color: #666;
+  margin: 0 30rpx;
+}
+.sports-time > text:nth-child(3){
+  vertical-align: middle;
+  font-size: 16px;
+  color: #666;
+}

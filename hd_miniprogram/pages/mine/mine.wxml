@@ -1,0 +1,87 @@
+<view class='container'>
+  <view class='baike'>
+
+    <view class='hd-title'>HD小百科</view>
+    <view class='item-wrapper'  wx:for="{{hdLimitData}}" wx:key="item">
+      <view class='item-header'>
+        {{index}}：{{item.caseName}}
+      </view>
+      <view class='item-content'>
+        <view class='item-flex-1th'>
+          {{item.introduce}}
+        </view>
+        <view class='item-flex-2th'>
+          <image src='{{item.fileUrl  ? item.fileUrl : defaultImg}}'></image>
+        </view>
+      </view>
+    </view>
+
+    <view wx:if="{{wikiBool}}" class='load-more' bindtap="loadMore">
+      点击查看更多
+    </view>
+
+  </view>
+
+  
+  <view class='baike'>
+
+    <view class='hd-title'>康复视频</view>
+    <view class='video-container' wx:for="{{videoList}}" wx:key="item">
+      <view class='video-header'>
+        {{item.name}}
+      </view>
+      <view class='video-wrapper'>
+        <video src='{{item.fileUrl ? item.fileUrl : defaultVideoUrl}}'></video>
+      </view>
+    </view>
+
+    <view wx:if="{{videoBool}}" class='load-more' bindtap='loadMoreVideo'>
+      点击查看更多
+    </view>
+
+  </view>
+  <view class='punch-record'>
+    <view class='punch-record-header'>
+      我的打卡记录
+    </view>
+    <view class='today-punch'>
+      今日打卡: 2019年2月14日
+    </view>
+    <view class='ranking-list'>
+      运动排名: <text>第1名</text>
+    </view>
+    <view class='today-punch'>
+      运动: 
+      <view class='today-punch-time'><icon class='checked'></icon><text>10分钟</text></view>
+      <view class='today-punch-time'><icon></icon><text>20分钟</text></view>
+      <view class='today-punch-time'><icon></icon><text>30分钟</text></view>
+      <view class='today-punch-time'><icon></icon><text>40分钟以上</text></view>
+    </view>
+    
+    <view class='today-punch today-punch-housework'>
+      做家务: 
+      <view class='today-punch-time'><icon class='checked'></icon><text>10分钟</text></view>
+      <view class='today-punch-time'><icon></icon><text>20分钟</text></view>
+      <view class='today-punch-time'><icon></icon><text>30分钟</text></view>
+      <view class='today-punch-time'><icon></icon><text>40分钟以上</text></view>
+    </view>
+  </view>
+
+  
+  <view class='today-punch today-punch-sport'>
+    <view><icon class='checked'></icon><text>本周运动排名</text></view>
+    <view><icon></icon><text>本月运动排名</text></view>
+    <view><icon></icon><text>本年运动排名</text></view>
+  </view>
+
+  <view class='sports-time'>
+    <image src='https://image.dapengjiaoyu.com/2019/02/js37nc91.png'></image><text>王明山</text><text>本周运动共200分钟</text>
+  </view>
+  <view class='sports-time'>
+    <image src='https://image.dapengjiaoyu.com/2019/02/js37nc91.png'></image><text>王明山</text><text>本周运动共200分钟</text>
+  </view>
+  <view class='sports-time'>
+    <image src='https://image.dapengjiaoyu.com/2019/02/js37nc91.png'></image><text>王明山</text><text>本周运动共200分钟</text>
+  </view>
+
+</view>

@@ -1,0 +1,30 @@
+<view class='container'>
+  <image class='img-banner' src='../../img/WX20190307-142344@2x.png'></image>
+  <!-- <view>
+    <view class='info-detail-wrapper' wx:for="{{exampleList}}" wx:key="item">
+      <view>{{item.caseName}}</view>
+      <view>姓名 {{item.name}}年龄：{{item.age}}岁</view>
+      <view>
+        <view>{{item.introduce}}</view>
+        <view>
+        <image src='https://image.dapengjiaoyu.com/2018/08/c2d899b1a397c0351be8a77440956ef5.jpg?x-oss-process=style/80x80'></image>
+        </view>
+      </view>
+      <view><text>主治医生：{{item.doctor}}</text><text>所属医院：{{item.hospital}}</text></view>
+    </view>
+    <view wx:if="{{loadMoreBool}}" class='load-more' bindtap='loadMoreExample'>点击查看更多</view>
+  </view> -->
+  <video src="http://47.111.91.110:5432/216764213942078664.mp4"></video>
+  <view class='canvas-container canvas-container-steps'>
+    <view>亨延顿舞蹈症区域分布图</view>
+    <ff-canvas id="stepsPan" canvas-id="stepsPan" opts="{{ opts }}"></ff-canvas>
+  </view>
+  <view class='canvas-container canvas-container-guage'>
+    <view class='canvas-container-guage-view'>亨延顿舞蹈症年龄分布图</view>
+    <ff-canvas id="guage-dom" canvas-id="guage" opts="{{ pieOpts }}"></ff-canvas>
+  </view>
+  <view class='canvas-container canvas-container-ring'>
+    <view>亨延顿舞蹈症职业分布图</view>
+    <ff-canvas id="ring-dom" canvas-id="ring" opts="{{ ringOpts }}"></ff-canvas>
+  </view>
+</view>

@@ -1,0 +1,178 @@
+/* pages/mine.wxss */
+.container{
+  background-color: #eee;
+}
+.baseinfo{
+  display: -webkit-flex;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  background-color: #fff;
+  margin: 5px 0;
+}
+.baseinfo > view{
+  color: #999;
+}
+.baseinfo > view:nth-child(2) > text:nth-child(1){
+  color: #000;
+}
+.baseinfo > view:nth-child(1){
+  flex: 2;
+  text-align: center;
+}
+.baseinfo > view:nth-child(1) > image{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 20rpx;
+}
+.baseinfo > view:nth-child(2){
+  flex: 4;
+}
+.baseinfo > view:nth-child(2) > text:nth-child(2){
+  font-size: 12px;
+}
+.baseinfo > view:nth-child(3){
+  flex: 4;
+  text-align: center;
+}
+.baseinfo > view:nth-child(2) > text{
+  display: block;
+}
+.store-history{
+  background-color: #fff;
+  margin: 5px 0;
+  padding: 5px 10px;
+}
+.store-history > view:nth-child(1){
+  color: #b656ec;
+}
+.store-history > view:nth-child(2){
+  margin: 5px 0;
+}
+.clock-wrapper{
+  width: 100%;
+}
+.time-clock{
+  background-color: #fff;
+  padding: 5px 10px;
+  position: relative;
+}
+.time-clock > switch{
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  zoom: .7;
+}
+.clock-wrapper > view:nth-child(1){
+  color: #b656ec;
+  background-color: #fff;
+  padding: 5px 10px;
+}
+.check-history{
+  background-color: #fff;
+  padding: 5px 10px;
+  color: #b656ec;
+}
+.module-wrapper{
+  background-color: #eee;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.module-wrapper > view{
+  width: 50%;
+  height: 300rpx;
+  background-color: #fff;
+  text-align: center;
+}
+.module-wrapper > view > view{
+  width: 60%;
+  height: 200rpx;
+  margin: 0 auto;
+  background-color: #eee;
+  border-radius: 10px;
+}
+.module-wrapper > view > text{
+  color: #b656ec;
+  padding: 10px 0;
+  display: inline-block;
+}
+.module-wrapper > view:nth-child(odd){
+  position: relative;
+}
+.module-wrapper > view:nth-child(odd):after{
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 1px;
+  height: 130px;
+  background-color: #eee;
+  content: '';
+  display: block;
+}
+.module-wrapper > view:nth-child(1),.module-wrapper > view:nth-child(2){
+  border-bottom: 1px solid #eee;
+}
+.module-wrapper > view:nth-child(3),.module-wrapper > view:nth-child(4){
+  padding-top: 10px;
+}
+.recommend-wrapper{
+  background-color: #fff;
+  margin: 5px 0;
+}
+.recommend-wrapper > picker{
+  padding: 5px 10px;
+  width: 100%;
+}
+text.picker-item:nth-child(2){
+  margin-left: 30px;
+  color: #999;
+}
+.recommend-hospital-list{
+  margin: 5px 0;
+}
+.hospital-wrapper{
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #fff;
+}
+.hospital-wrapper > view:nth-child(1){
+  flex: 2;
+  text-align: center;
+}
+.recommend-wrapper > view:nth-child(1){
+  padding: 5px 10px;
+  color: #b656ec;
+}
+.hospital-wrapper > view:nth-child(1) > image{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 10px;
+}
+.hospital-wrapper > view:nth-child(2){
+  flex: 8;
+}
+.hospital-wrapper > view:nth-child(2) > view:nth-child(1) > text{
+  font-size: 14px;
+}
+.hospital-wrapper > view:nth-child(2) > view:nth-child(2) > text{
+  font-size: 13px;
+  color: #999;
+}
+.hospital-wrapper > view:nth-child(2) > view:nth-child(3) > text{
+  font-size: 13px;
+  color: #999;
+}
+.get-more-infomation{
+  background-color: #fff;
+  padding: 5px 10px;
+  font-size: 14px;
+  color: #0366d6;
+}

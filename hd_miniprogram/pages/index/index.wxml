@@ -1,0 +1,91 @@
+<view class='container'>
+  <view class='baseinfo'>
+    <view>
+      <image src='https://image.dapengjiaoyu.com/2018/08/c2d899b1a397c0351be8a77440956ef5.jpg?x-oss-process=style/80x80'></image>
+    </view>
+    <view>
+      <text>凌兆地</text>
+      <text>欢迎您</text>
+    </view>
+    <view>实名认证</view>
+  </view>
+  <view class='store-history'>
+    <view>我的积分：1000个健康豆</view>
+    <!-- <view bindtap='indexEvent'>兑换商城</view>
+    <view bindtap='staticsEvent'>获取记录</view> -->
+    <navigator url='/pages/mine/mine'>兑换商城</navigator> 
+    <navigator url='/pages/statistics/statistics'>获取记录</navigator> 
+  </view>
+  <view class='clock-wrapper'>
+    <view>我的吃药提醒</view>
+    <view class='time-clock'>
+      <text>早上(饭前、饭后)</text>
+      <switch checked bindchange='' color='#b656ec'></switch>
+    </view>
+    <view class='time-clock'>
+      <text>中午(饭前、饭后)</text>
+      <switch bindchange='' color='#b656ec'></switch>
+    </view>
+    <view class='time-clock'>
+      <text>晚上(饭前、饭后)</text>
+      <switch bindchange='' color='#b656ec'></switch>
+    </view>
+    <view class='check-history'>历史用药记录，点击查看</view>
+  </view>
+  <view class='module-wrapper'>
+    <view><view></view><text>个人信息</text></view>
+    <view><view></view><text>治疗记录</text></view>
+    <view><view></view><text>用药记录</text></view>
+    <view><view></view><text>疾病进展</text></view>
+  </view>
+  <view class='recommend-wrapper'>
+    <view>专家推荐</view>
+    <picker>
+      <text class='picker-item'>所属省份</text>
+      <text class='picker-item'>北京市</text>
+    </picker>
+    <picker>
+      <text class='picker-item'>所属市</text>
+      <text class='picker-item'>北京市</text>
+    </picker>
+  </view>
+  <view class='recommend-hospital-list'>
+    <view class='hospital-wrapper'>
+      <view>
+        <image src='https://image.dapengjiaoyu.com/2018/08/c2d899b1a397c0351be8a77440956ef5.jpg?x-oss-process=style/80x80'></image>
+      </view>
+      <view>
+        <view>
+          <text>李建宇</text>
+          <text>北京医科大学</text>
+        </view>
+        <view bindtap='navigateToMiniprogram'>
+          <text>在线问诊</text>
+        </view>
+        <view>
+          <text>推荐热度（综合）：4.8（近两年患者推荐）</text>
+        </view>
+      </view>
+    </view>
+    <view class='hospital-wrapper'>
+      <view>
+        <image src='https://image.dapengjiaoyu.com/2018/08/c2d899b1a397c0351be8a77440956ef5.jpg?x-oss-process=style/80x80'></image>
+      </view>
+      <view>
+        <view>
+          <text>李建宇</text>
+          <text>北京医科大学</text>
+        </view>
+        <view bindtap='navigateToMiniprogram'>
+          <text>在线问诊</text>
+        </view>
+        <view>
+          <text>推荐热度（综合）：4.8（近两年患者推荐）</text>
+        </view>
+      </view>
+    </view>
+    <view class='get-more-infomation'>
+      点击查看更多
+    </view>
+  </view>
+</view>
