@@ -35,7 +35,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
-			<version>4.2.4.RELEASE</version>
+			<version>5.2.20.RELEASE</version>
 			<!-- 包含访问配置文件、创建和管理bean以及进行Inversion of Control / Dependency Injection（IoC/DI）操作相关的所有类 -->
 		</dependency>
 		<dependency>
